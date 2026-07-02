@@ -1,0 +1,120 @@
+/* Threadit — Reddit-style dark theme */
+body {
+  background: #0b1416; color: #d7dadc;
+  font: 14px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+a { color: inherit; text-decoration: none; }
+
+.site-header {
+  background: #101b1e; border-bottom: 1px solid #22333a;
+  position: sticky; top: 0; z-index: 5;
+}
+.site-header-inner {
+  max-width: 1050px; margin: 0 auto; display: flex; align-items: center;
+  gap: 14px; padding: 8px 16px;
+}
+.t-logo { display: flex; align-items: center; gap: 8px; font-size: 20px; font-weight: 800; }
+.t-logo .dot {
+  width: 30px; height: 30px; border-radius: 50%; background: #ff4500;
+  display: inline-flex; align-items: center; justify-content: center; font-size: 16px;
+}
+.t-search {
+  flex: 1; max-width: 520px; background: #1a282d; border: 1px solid #2e434c;
+  border-radius: 9999px; padding: 8px 16px; color: #818b90; font-size: 13px;
+}
+.hdr-date { margin-left: auto; font-size: 12px; color: #818b90; }
+.hdr-date b { color: #4da6ff; font-weight: 600; }
+
+.community-banner { background: linear-gradient(90deg, #034694, #0a67c2 60%, #05529e); height: 96px; }
+.community-bar { background: #101b1e; border-bottom: 1px solid #22333a; }
+.community-bar-inner {
+  max-width: 1050px; margin: 0 auto; padding: 0 16px 12px; display: flex; align-items: flex-end; gap: 14px;
+}
+.community-icon {
+  width: 64px; height: 64px; border-radius: 50%; background: #034694; border: 4px solid #101b1e;
+  margin-top: -22px; display: flex; align-items: center; justify-content: center; font-size: 26px;
+}
+.community-names h1 { margin: 0; font-size: 24px; }
+.community-names .sub { color: #818b90; font-size: 13px; }
+.join-btn {
+  margin-left: auto; background: #d7dadc; color: #0b1416; font-weight: 700;
+  border-radius: 9999px; padding: 6px 18px; font-size: 13px; cursor: pointer;
+}
+
+.page { max-width: 1050px; margin: 18px auto; display: grid; grid-template-columns: minmax(0, 1fr) 312px; gap: 20px; padding: 0 16px; }
+
+.t-tabs { display: flex; gap: 8px; margin-bottom: 12px; }
+.tab { background: #101b1e; border: 1px solid #22333a; border-radius: 9999px; padding: 6px 14px; font-size: 13px; color: #818b90; cursor: pointer; }
+.tab.active { color: #d7dadc; font-weight: 700; background: #1a282d; }
+
+.t-card {
+  display: flex; background: #101b1e; border: 1px solid #22333a; border-radius: 8px;
+  margin-bottom: 10px; cursor: pointer; overflow: hidden;
+}
+.t-card:hover { border-color: #3b525c; }
+.t-card.t-open { cursor: default; }
+.votes {
+  background: #0d171a; padding: 10px 6px; display: flex; flex-direction: column;
+  align-items: center; gap: 2px; min-width: 42px; color: #818b90;
+}
+.votes .score { font-weight: 700; font-size: 13px; color: #d7dadc; }
+.vote svg { width: 18px; height: 18px; display: block; }
+.vote.up:hover { color: #ff4500; }
+.vote.down:hover { color: #7193ff; }
+
+.t-body { padding: 10px 14px 8px; min-width: 0; }
+.t-meta { font-size: 12px; color: #818b90; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.t-user { display: inline-flex; align-items: center; gap: 4px; font-weight: 600; color: #b9c2c6; }
+.t-title { font-size: 17px; margin: 6px 0 4px; line-height: 1.3; }
+h1.t-title { font-size: 21px; }
+.t-preview {
+  color: #9aa5a9; font-size: 13px; display: -webkit-box; -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
+}
+.t-full { margin-top: 6px; font-size: 14px; color: #c4ccd0; }
+.t-foot { display: flex; align-items: center; gap: 6px; color: #818b90; font-size: 12px; font-weight: 700; margin: 8px 0 2px; }
+.t-foot svg { width: 16px; height: 16px; }
+
+.flair { border-radius: 9999px; padding: 2px 9px; font-size: 11px; font-weight: 700; color: #fff; background: #565d61; }
+.flair-post-match-thread { background: #00a651; }
+.flair-transfer-news { background: #c47f17; }
+.flair-official-source { background: #034694; }
+.flair-analysis { background: #6f42c1; }
+.flair-injury-news { background: #c0455e; }
+.flair-unpopular-opinion { background: #b02a37; }
+.flair-shitpost-saturday { background: #d63384; }
+
+.back { display: inline-block; margin-bottom: 10px; color: #4da6ff; font-weight: 600; font-size: 13px; }
+.c-sort { color: #818b90; font-size: 12px; margin: 14px 0 8px; }
+.comments { background: #101b1e; border: 1px solid #22333a; border-radius: 8px; padding: 6px 16px; }
+.comment { padding: 12px 0; border-bottom: 1px solid #182529; }
+.comment:last-child { border-bottom: none; }
+.comment-reply { margin-left: 26px; border-left: 2px solid #2e434c; padding-left: 14px; border-bottom: none; }
+.c-head { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+.c-time { color: #818b90; }
+.c-text { margin: 5px 0; font-size: 14px; }
+.c-foot { display: flex; align-items: center; gap: 6px; color: #818b90; font-size: 12px; }
+.c-foot .score { font-weight: 700; }
+.c-foot.neg .score { color: #e0245e; }
+.c-foot svg { width: 15px; height: 15px; }
+.c-reply { margin-left: 8px; font-weight: 700; cursor: pointer; }
+
+.side .widget { background: #101b1e; border: 1px solid #22333a; }
+.widget.about { padding: 0 0 14px; overflow: hidden; }
+.about-banner { height: 34px; background: linear-gradient(90deg, #034694, #0a67c2); }
+.widget.about h3, .widget.about p, .widget.about .about-stats { margin-left: 16px; margin-right: 16px; }
+.widget.about p { color: #9aa5a9; font-size: 13px; }
+.about-stats { display: flex; gap: 28px; font-size: 13px; }
+.about-stats div { display: flex; flex-direction: column; }
+.about-stats b { font-size: 15px; }
+.about-stats span { color: #818b90; font-size: 11px; }
+
+.side-foot { font-size: 12px; color: #818b90; padding: 4px 6px; }
+
+.ent { color: #4da6ff; }
+
+@media (max-width: 900px) {
+  .page { grid-template-columns: 1fr; }
+  .side { display: none; }
+  .t-search { display: none; }
+}

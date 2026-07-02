@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chattr / Home</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐦</text></svg>">
+  <link rel="stylesheet" href="../assets/css/common.css">
+  <link rel="stylesheet" href="../assets/css/chattr.css">
+</head>
+<body>
+  <div class="layout">
+
+    <nav class="nav">
+      <div class="logo"><span class="bird">🐦</span><span class="word">chattr</span></div>
+      <div class="nav-item active"><span class="ico">🏠</span><span>Home</span></div>
+      <div class="nav-item"><span class="ico">🔍</span><span>Explore</span></div>
+      <div class="nav-item"><span class="ico">🔔</span><span>Notifications</span></div>
+      <div class="nav-item"><span class="ico">✉️</span><span>Messages</span></div>
+      <div class="nav-item"><span class="ico">⚽</span><span>Football</span></div>
+      <div class="nav-item"><span class="ico">👤</span><span>Profile</span></div>
+      <div class="nav-cta">Chatt</div>
+      <div class="nav-foot">Fictional FC 26 career-mode fun · <a href="../index.html">← Hub</a></div>
+    </nav>
+
+    <main class="center">
+      <div class="top-bar">
+        <h1>Home</h1>
+        <div class="top-tabs"><span class="active">For you</span><span>Following</span></div>
+        <div class="game-date-chip">In-game date: <b id="game-date">…</b></div>
+      </div>
+      <div class="composer">
+        <span class="avatar" style="background:#034694">YOU</span>
+        <span>What's happening?</span>
+        <span class="fake-btn">Chatt</span>
+      </div>
+      <div id="feed"></div>
+    </main>
+
+    <aside class="side">
+      <div class="side-sticky">
+        <div class="search">🔍 Search Chattr</div>
+        <div id="sidebar"></div>
+        <div class="side-foot">Chattr is a fictional site for an FC 26 Chelsea career mode. Not affiliated with anyone. KTBFFH.</div>
+      </div>
+    </aside>
+
+  </div>
+  <script src="../assets/js/common.js"></script>
+  <script src="../assets/js/chattr.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CFC Career Mode — Media Hub</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦁</text></svg>">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      background: radial-gradient(1200px 700px at 20% 0%, #0a4aa0 0%, #04264f 45%, #020d1c 100%);
+      color: #eaf2fb; font: 16px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      padding: 32px 16px;
+    }
+    .wrap { max-width: 860px; width: 100%; text-align: center; }
+    .crest { font-size: 56px; }
+    h1 { font-size: 34px; margin: 8px 0 4px; letter-spacing: -1px; }
+    .sub { color: #9db8d8; margin-bottom: 6px; }
+    .date { display: inline-block; background: #ffffff14; border: 1px solid #ffffff2b; border-radius: 9999px; padding: 5px 16px; font-size: 13px; margin-bottom: 34px; }
+    .date b { color: #7cc0ff; }
+    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    a.card {
+      background: #ffffff0f; border: 1px solid #ffffff22; border-radius: 20px;
+      padding: 28px 24px; text-decoration: none; color: inherit; text-align: left;
+      transition: transform .15s ease, background .15s ease;
+    }
+    a.card:hover { transform: translateY(-4px); background: #ffffff1a; }
+    .card .icon { font-size: 38px; }
+    .card h2 { margin: 10px 0 6px; font-size: 24px; }
+    .card p { margin: 0; color: #9db8d8; font-size: 14px; }
+    .card .go { display: inline-block; margin-top: 16px; font-weight: 700; color: #7cc0ff; font-size: 14px; }
+    .foot { margin-top: 36px; font-size: 12px; color: #6d87a8; }
+    @media (max-width: 640px) { .cards { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="crest">🦁</div>
+    <h1>The Rea Rebuild</h1>
+    <div class="sub">Chelsea FC · FC 26 Career Mode · Media Hub</div>
+    <div class="date">In-game date: <b id="game-date">…</b></div>
+    <div class="cards">
+      <a class="card" href="chattr/index.html">
+        <div class="icon">🐦</div>
+        <h2>Chattr</h2>
+        <p>Breaking transfer news, journalist exclusives, fan meltdowns and ratios. The timeline never sleeps.</p>
+        <span class="go">Open the timeline →</span>
+      </a>
+      <a class="card" href="threadit/index.html">
+        <div class="icon">👾</div>
+        <h2>Threadit · t/chelseafc</h2>
+        <p>Post-match threads, tactical breakdowns, vent threads and Terry's unpopular opinions.</p>
+        <span class="go">Enter the forum →</span>
+      </a>
+    </div>
+    <div class="foot">Fictional websites generated for a personal FC 26 career mode save. KTBFFH 💙</div>
+  </div>
+  <script>
+    fetch("data/season.json").then(r => r.json())
+      .then(s => { document.getElementById("game-date").textContent = s.currentDate; })
+      .catch(() => { document.getElementById("game-date").textContent = "—"; });
+  </script>
+</body>
+</html>

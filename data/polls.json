@@ -1,0 +1,28 @@
+{
+  "motm": {
+    "options": [
+      { "label": "Cole Palmer", "pct": 29 },
+      { "label": "Estêvão", "pct": 58 },
+      { "label": "João Pedro", "pct": 9 },
+      { "label": "Moisés Caicedo", "pct": 4 }
+    ],
+    "meta": "84,312 votes · Final results"
+  },
+  "finish": {
+    "options": [
+      { "label": "Champions 🏆", "pct": 38 },
+      { "label": "Top 4", "pct": 47 },
+      { "label": "5th–7th (classic us)", "pct": 10 },
+      { "label": "I refuse to believe again", "pct": 5 }
+    ],
+    "meta": "12,847 votes · Final results"
+  },
+  "rotation": {
+    "options": [
+      { "label": "Yes, Rea rotates too much", "pct": 18 },
+      { "label": "No, trust the process", "pct": 67 },
+      { "label": "It's the keeper, Terry", "pct": 15 }
+    ],
+    "meta": "4,203 votes · Final results"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "chelseafc": { "name": "Chelsea FC", "handle": "ChelseaFC", "verified": "gold", "color": "#034694", "initials": "CFC" },
+  "fabrizio": { "name": "Fabrizio Romano", "handle": "FabrizioRomano", "verified": "blue", "color": "#f2a900", "initials": "FR" },
+  "ornstein": { "name": "David Ornstein", "handle": "David_Ornstein", "verified": "blue", "color": "#3d4b57", "initials": "DO" },
+  "skysports": { "name": "Sky Sports Premier League", "handle": "SkySportsPL", "verified": "blue", "color": "#c40000", "initials": "SKY" },
+  "optajoe": { "name": "OptaJoe", "handle": "OptaJoe", "verified": "blue", "color": "#00b2a9", "initials": "OPTA" },
+  "palmer": { "name": "Cole Palmer", "handle": "ColePalmer10", "verified": "blue", "color": "#6db3d1", "initials": "CP" },
+  "enzo": { "name": "Enzo Fernández", "handle": "enzojfernandez", "verified": "blue", "color": "#75aadb", "initials": "EF" },
+  "joaopedro": { "name": "João Pedro", "handle": "joaopedrogales", "verified": "blue", "color": "#009c3b", "initials": "JP" },
+  "danny": { "name": "Danny 💙 REBUILD SZN", "handle": "CFCDanny", "verified": false, "color": "#1d9bf0", "initials": "D" },
+  "sue": { "name": "Sue", "handle": "BluesTilIDie_Sue", "verified": false, "color": "#8e6bbf", "initials": "S" },
+  "terry": { "name": "Terry", "handle": "ShedEndTerry", "verified": false, "color": "#5c6b3c", "initials": "T" },
+  "marcus": { "name": "Marcus | xG merchant", "handle": "xG_Marcus", "verified": false, "color": "#2b6cb0", "initials": "M" },
+  "chloe": { "name": "Chloe ⭐⭐", "handle": "CarefreeChloe", "verified": false, "color": "#d63384", "initials": "C" },
+  "gaz": { "name": "Gaz 🔴", "handle": "GoonerGaz", "verified": false, "color": "#ef0107", "initials": "G" }
+}

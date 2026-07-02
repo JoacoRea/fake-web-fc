@@ -1,0 +1,49 @@
+/* Shared: avatars, badges, sidebar widgets */
+* { box-sizing: border-box; }
+body { margin: 0; -webkit-font-smoothing: antialiased; }
+
+.avatar {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 50%;
+  color: #fff; font-weight: 700; font-size: 15px; flex-shrink: 0;
+  letter-spacing: -0.5px; user-select: none;
+}
+.avatar-sm { width: 32px; height: 32px; font-size: 12px; }
+.avatar-xs { width: 20px; height: 20px; font-size: 9px; }
+
+.badge { width: 17px; height: 17px; margin-left: 2px; flex-shrink: 0; }
+
+.ent { color: #1d9bf0; }
+
+.widget {
+  border-radius: 16px; padding: 14px 16px; margin-bottom: 16px;
+}
+.widget h3 { margin: 0 0 10px; font-size: 18px; }
+
+.league-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.league-table th { text-align: left; font-weight: 500; opacity: .55; padding: 2px 4px; }
+.league-table td { padding: 5px 4px; }
+.league-table .pos { opacity: .55; width: 20px; }
+.league-table .team { font-weight: 600; }
+.league-table .pts { font-weight: 700; }
+.league-table tr.us td { color: #4da6ff; }
+
+.form-row { display: flex; align-items: center; gap: 5px; margin-top: 10px; font-size: 12px; }
+.form-label { opacity: .55; margin-right: 4px; }
+.form-pip {
+  width: 20px; height: 20px; border-radius: 50%; color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+}
+.form-w { background: #00a651; }
+.form-d { background: #8a8d91; }
+.form-l { background: #e0245e; }
+
+.fixtures { list-style: none; margin: 0; padding: 0; font-size: 13px; }
+.fixtures li { padding: 8px 0; border-bottom: 1px solid rgba(128,128,128,.18); }
+.fixtures li:last-child { border-bottom: none; }
+.fx-top { display: flex; justify-content: space-between; font-weight: 600; }
+.fx-date { opacity: .6; font-weight: 400; }
+.fx-comp { font-size: 12px; opacity: .55; margin-top: 2px; }
+
+.load-error { padding: 24px; opacity: .7; font-size: 14px; }
