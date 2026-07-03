@@ -1,4 +1,4 @@
-# The Rea Rebuild — sitios ficticios para el modo carrera de FC 26 (Chelsea)
+# The Alonso Rebuild — sitios ficticios para el modo carrera de FC 26 (Chelsea)
 
 Redes sociales falsas que reaccionan a lo que pasa en tu save. 100% estático, sin dependencias.
 
@@ -38,9 +38,14 @@ Los personajes recurrentes (mantener su personalidad al generar contenido nuevo)
 | `@xG_Marcus` / `u/xG_Marcus` | El estadístico, defiende al equipo con xG |
 | `@CarefreeChloe` / `u/CarefreeChloe` | Optimista con banter filoso |
 | `@GoonerGaz` / `u/GoonerGaz_` | Hincha del Arsenal que viene a gastar |
+| `u/ZolaWasMyDad` | Nostálgico y meme lord del foro |
+| `u/KTBFFH_1905` | La memoria histórica, comentarios sensatos |
+| `u/KepaApologist` | Sigue defendiendo a Kepa, siempre downvoteado |
 
-> Estado actual: **contenido DEMO inventado** (mitad de temporada 25/26, DT ficticio "Joaquín Rea").
-> Se reemplaza con los datos reales del save en la próxima sesión.
+> Estado actual del save (22 Feb 2026, DT **Xabi Alonso**): 4º con 49 pts, 5 victorias seguidas,
+> finalista de Carabao vs Man City (Wembley, 22 Mar), FA Cup en cuartos vs Birmingham,
+> UCL clasificado directo a octavos (6º en fase liga). Enzo y João Pedro 14 goles; Neves y Gordon 8 asistencias.
+> Drama central: la venta de Cole Palmer y la salida de Reece James en plena reconstrucción de 12 fichajes.
 
 ---
 *Proyecto personal de diversión para un save de FC 26. Sin afiliación con nadie. KTBFFH 💙*

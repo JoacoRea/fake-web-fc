@@ -1,22 +1,23 @@
 {
-  "currentDate": "15 December 2025",
+  "currentDate": "22 February 2026",
   "season": "2025/26",
   "table": [
-    { "pos": 1, "team": "Arsenal", "p": 16, "gd": "+24", "pts": 38 },
-    { "pos": 2, "team": "Man City", "p": 16, "gd": "+19", "pts": 34 },
-    { "pos": 3, "team": "Liverpool", "p": 16, "gd": "+15", "pts": 33 },
-    { "pos": 4, "team": "Chelsea", "p": 16, "gd": "+14", "pts": 31, "us": true },
-    { "pos": 5, "team": "Aston Villa", "p": 16, "gd": "+7", "pts": 27 },
-    { "pos": 6, "team": "Man Utd", "p": 16, "gd": "+4", "pts": 26 },
-    { "pos": 7, "team": "Newcastle", "p": 16, "gd": "+6", "pts": 25 },
-    { "pos": 8, "team": "Tottenham", "p": 16, "gd": "-1", "pts": 23 }
+    { "pos": 1, "team": "Arsenal", "p": 27, "gd": "+29", "pts": 59 },
+    { "pos": 2, "team": "Aston Villa", "p": 27, "gd": "+15", "pts": 58 },
+    { "pos": 3, "team": "Man City", "p": 27, "gd": "+31", "pts": 53 },
+    { "pos": 4, "team": "Chelsea", "p": 27, "gd": "+28", "pts": 49, "us": true },
+    { "pos": 5, "team": "Liverpool", "p": 26, "gd": "+8", "pts": 46 },
+    { "pos": 6, "team": "Brighton", "p": 27, "gd": "+6", "pts": 40 },
+    { "pos": 7, "team": "Newcastle", "p": 27, "gd": "+6", "pts": 39 },
+    { "pos": 8, "team": "Spurs", "p": 26, "gd": "+8", "pts": 38 }
   ],
-  "form": ["W", "W", "D", "L", "W"],
+  "form": ["W", "W", "W", "W", "W"],
   "fixtures": [
-    { "comp": "Premier League", "date": "Sat 20 Dec", "opponent": "Everton", "home": true },
-    { "comp": "Premier League", "date": "Fri 26 Dec", "opponent": "Brighton", "home": false },
-    { "comp": "Premier League", "date": "Tue 30 Dec", "opponent": "Fulham", "home": true },
-    { "comp": "Carabao Cup · Semi-final, 1st leg", "date": "Tue 6 Jan", "opponent": "Newcastle", "home": false },
-    { "comp": "Premier League", "date": "Sat 10 Jan", "opponent": "Wolves", "home": false }
+    { "comp": "Premier League", "date": "Sun 1 Mar", "opponent": "Arsenal", "home": false },
+    { "comp": "Premier League", "date": "Wed 4 Mar", "opponent": "Aston Villa", "home": false },
+    { "comp": "FA Cup · Quarter-final", "date": "Sun 8 Mar", "opponent": "Birmingham", "home": true },
+    { "comp": "Premier League", "date": "Sat 14 Mar", "opponent": "Newcastle", "home": true },
+    { "comp": "Premier League", "date": "Sat 21 Mar", "opponent": "Everton", "home": false },
+    { "comp": "Carabao Cup · FINAL · Wembley", "date": "Sun 22 Mar", "opponent": "Man City", "home": true }
   ]
 }
