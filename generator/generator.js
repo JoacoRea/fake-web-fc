@@ -122,8 +122,8 @@ async function onGenerate() {
     setStatus("Pegá primero el resumen de los últimos partidos.", true);
     return;
   }
-  if (GEMINI_API_KEY === "PASTE_YOUR_RESTRICTED_API_KEY_HERE") {
-    setStatus("Falta configurar tu API key en generator/config.js.", true);
+  if (typeof GEMINI_API_KEY === "undefined" || GEMINI_API_KEY === "PASTE_YOUR_API_KEY_HERE") {
+    setStatus("Falta config.js con tu API key (ver generator/README.md) — esto solo funciona corriendo el sitio en tu PC.", true);
     return;
   }
 

@@ -5,40 +5,47 @@ Flash** (gratis) genera una tanda de posts al estilo Chattr, en el momento, en
 tu navegador. No toca `chattr/`, `threadit/`, ni ningún `data/*.json` — es un
 experimento aparte, nada se guarda (refrescar la página borra todo).
 
-## ⚠️ Sobre la API key
+## ⚠️ Solo funciona corriendo el sitio en tu PC
 
-Este sitio es **100% estático, sin servidor**. Eso significa que la llamada a
-Gemini se hace directo desde el navegador, y la API key queda **visible en el
-código fuente de la página** para cualquiera que la inspeccione. No hay forma
-de evitar esto sin agregar un backend (que este proyecto, a propósito, no
-tiene). La mitigación es restringir la key para que solo funcione desde este
-sitio.
+Este sitio es **100% estático, sin servidor**, así que la llamada a Gemini se
+hace directo desde el navegador con tu API key. Para que esa key **no quede
+públicamente en el repo de GitHub**, `generator/config.js` (donde va tu key
+real) está en `.gitignore` — nunca se commitea.
 
-## Setup
+La consecuencia: esta función **no va a funcionar** abriendo la URL pública
+(`joacorea.github.io/fake-web-fc/generator/`), porque ahí `config.js` no
+existe. Para usarla, corré el sitio localmente:
 
-1. **Generá una key nueva** en [Google AI Studio](https://aistudio.google.com/apikey).
-   Nunca reutilices una key que ya haya aparecido en un chat, un commit, o
-   cualquier lugar que no sea tu propia pantalla — tratala como comprometida
-   y generá otra.
-2. **Restringila** en [Google Cloud Console](https://console.cloud.google.com/apis/credentials):
-   - Buscá la key → **Application restrictions** → **HTTP referrers (web sites)**.
-   - Agregá `https://joacorea.github.io/*`.
-   - (Opcional, para probar en local) agregá también `http://localhost:8000/*`
-     y serví el sitio con `python3 -m http.server 8000` desde la raíz del repo
-     — la restricción por referrer no funciona bien abriendo el archivo
-     directo (`file://`).
-3. **Pegala** en `generator/config.js`, reemplazando el placeholder:
-   ```js
-   const GEMINI_API_KEY = "tu-key-acá";
+```bash
+python3 -m http.server 8000
+# abrí http://localhost:8000/generator/
+```
+
+(Si en algún momento querés que funcione también desde la URL pública, hace
+falta un mini-servidor/proxy que guarde la key del lado del servidor — eso
+agrega infraestructura nueva al proyecto, y por ahora se decidió no sumarla.)
+
+## Setup (una sola vez)
+
+1. Copiá la plantilla:
+   ```bash
+   cp generator/config.example.js generator/config.js
    ```
-4. Listo — abrí `generator/index.html`, pegá un resumen de partidos, y probá.
+2. Generá tu API key en [Google AI Studio](https://aistudio.google.com/apikey)
+   y pegala en `generator/config.js`, reemplazando el placeholder.
+   - Nunca reutilices una key que ya haya aparecido en un chat, un commit, o
+     cualquier lugar que no sea tu propia pantalla — tratala como comprometida
+     y generá otra.
+3. (Opcional pero recomendado) Restringila en
+   [Google Cloud Console](https://console.cloud.google.com/apis/credentials):
+   Credentials → tu key → Application restrictions → HTTP referrers → agregá
+   `http://localhost:8000/*`. Como esta función solo corre en local, alcanza
+   con restringirla a eso.
+4. Listo — abrí `generator/index.html` (servido por http, no como archivo
+   directo), pegá un resumen de partidos, y probá.
 
 ## Límites a tener en cuenta
 
-- La restricción por HTTP referrer frena el abuso casual (alguien copiando la
-  key para usarla en otro sitio), pero **no es una garantía absoluta** — un
-  llamado directo con headers falsificados podría sortearla. Al ser una key
-  del nivel gratis de Gemini, el peor caso es que se agote tu cuota diaria.
 - Nivel gratis de Gemini 2.5 Flash (verificar límites actuales en
   [ai.google.dev/gemini-api/docs/pricing](https://ai.google.dev/gemini-api/docs/pricing)):
   del orden de 250 pedidos por día, de sobra para este uso.
