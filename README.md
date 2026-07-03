@@ -28,6 +28,10 @@ Volvé a una sesión de Claude Code en este repo y contale qué pasó en tu save
 resultados, goles, fichajes, lesiones, posición en la tabla, cualquier drama.
 Claude escribe los posts, hilos y reacciones nuevas en `data/*.json` y pushea.
 
+**Atajo si jugás en PC con FC-26 Live Editor**: cada 5 partidos podés generar un
+resumen de texto automático (tabla, resultados, fixtures, goleadores) para pegar acá
+en vez de escribirlo todo a mano — ver `automation/live-editor/README.md`.
+
 Los personajes recurrentes (mantener su personalidad al generar contenido nuevo):
 
 | Cuenta | Personalidad |
