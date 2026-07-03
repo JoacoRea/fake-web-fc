@@ -68,32 +68,60 @@ const RESPONSE_SCHEMA = {
   }
 };
 
-async function callGemini(prompt) {
+const RETRYABLE_STATUSES = new Set([500, 502, 503, 504]);
+const MAX_ATTEMPTS = 4;
+const BASE_DELAY_MS = 1000;
+const MAX_DELAY_MS = 8000;
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function callGemini(prompt, onRetry) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
 
-  const res = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      contents: [{ parts: [{ text: prompt }] }],
-      generationConfig: {
-        responseMimeType: "application/json",
-        responseSchema: RESPONSE_SCHEMA
-      }
-    })
-  });
+  let lastStatus;
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: {
+          responseMimeType: "application/json",
+          responseSchema: RESPONSE_SCHEMA
+        }
+      })
+    });
 
-  if (!res.ok) {
+    if (res.ok) return parseGeminiResponse(await res.json());
+
+    lastStatus = res.status;
+
     if (res.status === 429) {
       throw new Error("Se acabó la cuota gratis de Gemini por ahora — probá de nuevo más tarde.");
     }
     if (res.status === 400 || res.status === 403) {
       throw new Error("La API key no funcionó. Revisá que esté bien pegada y restringida en generator/config.js.");
     }
+
+    if (RETRYABLE_STATUSES.has(res.status)) {
+      if (attempt < MAX_ATTEMPTS) {
+        const backoff = Math.min(BASE_DELAY_MS * 2 ** (attempt - 1), MAX_DELAY_MS);
+        const jitter = Math.random() * 600 - 300;
+        const delay = Math.max(300, backoff + jitter);
+        if (onRetry) onRetry(attempt, MAX_ATTEMPTS);
+        await sleep(delay);
+        continue;
+      }
+      throw new Error(`Gemini sigue saturado (HTTP ${lastStatus}) después de varios intentos. Probá de nuevo en un rato.`);
+    }
+
     throw new Error(`Gemini respondió con un error (HTTP ${res.status}).`);
   }
+}
 
-  const data = await res.json();
+function parseGeminiResponse(data) {
   const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
   if (!text) throw new Error("La respuesta de Gemini vino vacía o con un formato inesperado.");
 
@@ -134,7 +162,9 @@ async function onGenerate() {
   try {
     const accounts = await loadJSON("../data/accounts.json");
     const prompt = buildPrompt(accounts, matchesText, count);
-    const rawPosts = await callGemini(prompt);
+    const rawPosts = await callGemini(prompt, (attempt, max) => {
+      setStatus(`Gemini está saturado, reintentando (${attempt}/${max})…`);
+    });
 
     const validPosts = rawPosts.filter(p => {
       const ok = p && typeof p.author === "string" && accounts[p.author];
