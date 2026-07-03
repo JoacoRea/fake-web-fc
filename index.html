@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CFC Career Mode — Media Hub</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦁</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11.3' fill='%23034694'/%3E%3Ccircle cx='12' cy='12' r='10.4' fill='none' stroke='%23e2b719' stroke-width='.9'/%3E%3Cg transform='translate(12 12) scale(.72) translate(-12 -12.5)'%3E%3Cg fill='%23d78f1e'%3E%3Ccircle cx='12' cy='4.7' r='2.8'/%3E%3Ccircle cx='17.52' cy='6.98' r='2.8'/%3E%3Ccircle cx='19.8' cy='12.5' r='2.8'/%3E%3Ccircle cx='17.52' cy='18.02' r='2.8'/%3E%3Ccircle cx='12' cy='20.3' r='2.8'/%3E%3Ccircle cx='6.48' cy='18.02' r='2.8'/%3E%3Ccircle cx='4.2' cy='12.5' r='2.8'/%3E%3Ccircle cx='6.48' cy='6.98' r='2.8'/%3E%3Ccircle cx='12' cy='12.5' r='8'/%3E%3C/g%3E%3Ccircle cx='12' cy='12.9' r='6' fill='%23f2c14e'/%3E%3Cellipse cx='12' cy='15.2' rx='2.7' ry='2.1' fill='%23fbe8bd'/%3E%3Ccircle cx='9.7' cy='11.5' r='.9' fill='%233d2508'/%3E%3Ccircle cx='14.3' cy='11.5' r='.9' fill='%233d2508'/%3E%3Cpath d='M10.95 14.1h2.1L12 15.5z' fill='%233d2508'/%3E%3C/g%3E%3C/svg%3E">
   <style>
     * { box-sizing: border-box; }
     body {
@@ -14,7 +14,7 @@
       padding: 32px 16px;
     }
     .wrap { max-width: 860px; width: 100%; text-align: center; }
-    .crest { font-size: 56px; }
+    .crest svg { width: 78px; height: 78px; filter: drop-shadow(0 4px 14px rgba(0,0,0,.4)); }
     h1 { font-size: 34px; margin: 8px 0 4px; letter-spacing: -1px; }
     .sub { color: #9db8d8; margin-bottom: 6px; }
     .date { display: inline-block; background: #ffffff14; border: 1px solid #ffffff2b; border-radius: 9999px; padding: 5px 16px; font-size: 13px; margin-bottom: 34px; }
@@ -26,35 +26,36 @@
       transition: transform .15s ease, background .15s ease;
     }
     a.card:hover { transform: translateY(-4px); background: #ffffff1a; }
-    .card .icon { font-size: 38px; }
+    .card .icon svg { width: 42px; height: 42px; }
     .card h2 { margin: 10px 0 6px; font-size: 24px; }
     .card p { margin: 0; color: #9db8d8; font-size: 14px; }
     .card .go { display: inline-block; margin-top: 16px; font-weight: 700; color: #7cc0ff; font-size: 14px; }
     .foot { margin-top: 36px; font-size: 12px; color: #6d87a8; }
+    .foot svg { width: 13px; height: 13px; vertical-align: -2px; }
     @media (max-width: 640px) { .cards { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="crest">🦁</div>
+    <div class="crest"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11.3" fill="#034694"/><circle cx="12" cy="12" r="10.4" fill="none" stroke="#e2b719" stroke-width=".9"/><g transform="translate(12 12) scale(.72) translate(-12 -12.5)"><g fill="#d78f1e"><circle cx="12" cy="4.7" r="2.8"/><circle cx="17.52" cy="6.98" r="2.8"/><circle cx="19.8" cy="12.5" r="2.8"/><circle cx="17.52" cy="18.02" r="2.8"/><circle cx="12" cy="20.3" r="2.8"/><circle cx="6.48" cy="18.02" r="2.8"/><circle cx="4.2" cy="12.5" r="2.8"/><circle cx="6.48" cy="6.98" r="2.8"/><circle cx="12" cy="12.5" r="8"/></g><circle cx="12" cy="12.9" r="6" fill="#f2c14e"/><ellipse cx="12" cy="15.2" rx="2.7" ry="2.1" fill="#fbe8bd"/><circle cx="9.7" cy="11.5" r=".9" fill="#3d2508"/><circle cx="14.3" cy="11.5" r=".9" fill="#3d2508"/><path d="M10.95 14.1h2.1L12 15.5z" fill="#3d2508"/><path d="M12 15.5v.9" stroke="#3d2508" stroke-width=".9" stroke-linecap="round"/></g></svg></div>
     <h1>The Alonso Rebuild</h1>
     <div class="sub">Chelsea FC · FC 26 Career Mode · Media Hub</div>
     <div class="date">In-game date: <b id="game-date">…</b></div>
     <div class="cards">
       <a class="card" href="chattr/index.html">
-        <div class="icon">🐦</div>
+        <div class="icon"><svg viewBox="0 0 24 24"><path fill="#1d9bf0" d="M21.3 6.4c-.65.29-1.35.48-2.08.57a3.63 3.63 0 0 0 1.59-2c-.7.41-1.47.71-2.29.87a3.61 3.61 0 0 0-6.24 2.47c0 .28.03.56.09.82A10.25 10.25 0 0 1 4.93 5.4a3.6 3.6 0 0 0 1.12 4.82 3.58 3.58 0 0 1-1.64-.45v.05a3.61 3.61 0 0 0 2.9 3.54c-.3.08-.63.13-.96.13-.23 0-.46-.02-.68-.07a3.62 3.62 0 0 0 3.37 2.51 7.25 7.25 0 0 1-4.48 1.55c-.29 0-.58-.02-.86-.05a10.2 10.2 0 0 0 5.54 1.63c6.65 0 10.29-5.51 10.29-10.29l-.01-.47a7.35 7.35 0 0 0 1.81-1.87z"/></svg></div>
         <h2>Chattr</h2>
         <p>Breaking transfer news, journalist exclusives, fan meltdowns and ratios. The timeline never sleeps.</p>
         <span class="go">Open the timeline →</span>
       </a>
       <a class="card" href="threadit/index.html">
-        <div class="icon">👾</div>
+        <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#ff4500"/><g fill="#fff" transform="translate(4.56 4.56) scale(.62)"><rect x="5" y="4" width="2" height="2"/><rect x="17" y="4" width="2" height="2"/><rect x="7" y="6" width="2" height="2"/><rect x="15" y="6" width="2" height="2"/><rect x="5" y="8" width="14" height="2"/><rect x="3" y="10" width="4" height="2"/><rect x="9" y="10" width="6" height="2"/><rect x="17" y="10" width="4" height="2"/><rect x="1" y="12" width="22" height="2"/><rect x="1" y="14" width="2" height="2"/><rect x="5" y="14" width="14" height="2"/><rect x="21" y="14" width="2" height="2"/><rect x="1" y="16" width="2" height="2"/><rect x="5" y="16" width="2" height="2"/><rect x="17" y="16" width="2" height="2"/><rect x="21" y="16" width="2" height="2"/><rect x="7" y="18" width="4" height="2"/><rect x="13" y="18" width="4" height="2"/></g></svg></div>
         <h2>Threadit · t/chelseafc</h2>
         <p>Post-match threads, tactical breakdowns, vent threads and Terry's unpopular opinions.</p>
         <span class="go">Enter the forum →</span>
       </a>
     </div>
-    <div class="foot">Fictional websites generated for a personal FC 26 career mode save. KTBFFH 💙</div>
+    <div class="foot">Fictional websites generated for a personal FC 26 career mode save. KTBFFH <svg viewBox="0 0 24 24"><path fill="#7cc0ff" d="M12 20.3C7.2 17.2 4 13.9 4 10.1 4 7.3 6 5.3 8.6 5.3c1.5 0 2.8.7 3.4 1.8.6-1.1 1.9-1.8 3.4-1.8C18 5.3 20 7.3 20 10.1c0 3.8-3.2 7.1-8 10.2z"/></svg></div>
   </div>
   <script>
     fetch("data/season.json").then(r => r.json())

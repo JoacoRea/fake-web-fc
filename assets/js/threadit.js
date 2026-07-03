@@ -3,6 +3,9 @@
 const UP = '<svg viewBox="0 0 24 24"><path d="M12 4l7 8h-4v8h-6v-8H5z" fill="currentColor"/></svg>';
 const DOWN = '<svg viewBox="0 0 24 24"><path d="M12 20l-7-8h4V4h6v8h4z" fill="currentColor"/></svg>';
 const BUBBLE = '<svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>';
+const TAB_HOT = '<svg viewBox="0 0 24 24"><path fill="#ff4500" d="M12 2.7c.4 2.8-.8 4.4-2.1 5.9C8.6 10.1 7.2 11.7 7.2 14a4.8 4.8 0 0 0 9.6 0c0-1.4-.5-2.7-1.3-3.8-.4 1-1 1.7-1.9 2.1.6-2.9-.3-6.7-1.6-9.6z"/></svg>';
+const TAB_NEW = '<svg viewBox="0 0 24 24"><path fill="#f2c744" d="M12 3Q13 11 21 12Q13 13 12 21Q11 13 3 12Q11 11 12 3z"/></svg>';
+const TAB_TOP = '<svg viewBox="0 0 24 24"><path fill="#e2b719" d="M6.5 3.5h11v4a5.5 5.5 0 0 1-4 5.3V15h2.3v2H8.2v-2h2.3v-2.2a5.5 5.5 0 0 1-4-5.3v-4z"/><path d="M6.5 5H4.2a3.3 3.3 0 0 0 3 3.3M17.5 5h2.3a3.3 3.3 0 0 1-3 3.3" fill="none" stroke="#e2b719" stroke-width="1.6" stroke-linecap="round"/></svg>';
 
 let THREADS = [];
 let SEASON = null;
@@ -82,7 +85,7 @@ function render() {
     window.scrollTo(0, 0);
   } else {
     main.innerHTML = `
-      <div class="t-tabs"><span class="tab active">🔥 Hot</span><span class="tab">✨ New</span><span class="tab">🏆 Top</span></div>
+      <div class="t-tabs"><span class="tab active">${TAB_HOT} Hot</span><span class="tab">${TAB_NEW} New</span><span class="tab">${TAB_TOP} Top</span></div>
       ${THREADS.map(cardHTML).join("")}`;
   }
 }
