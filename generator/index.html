@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chattr Lab — experimental generator</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%231d9bf0' d='M21.3 6.4c-.65.29-1.35.48-2.08.57a3.63 3.63 0 0 0 1.59-2c-.7.41-1.47.71-2.29.87a3.61 3.61 0 0 0-6.24 2.47c0 .28.03.56.09.82A10.25 10.25 0 0 1 4.93 5.4a3.6 3.6 0 0 0 1.12 4.82 3.58 3.58 0 0 1-1.64-.45v.05a3.61 3.61 0 0 0 2.9 3.54c-.3.08-.63.13-.96.13-.23 0-.46-.02-.68-.07a3.62 3.62 0 0 0 3.37 2.51 7.25 7.25 0 0 1-4.48 1.55c-.29 0-.58-.02-.86-.05a10.2 10.2 0 0 0 5.54 1.63c6.65 0 10.29-5.51 10.29-10.29l-.01-.47a7.35 7.35 0 0 0 1.81-1.87z'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../assets/css/common.css">
+  <link rel="stylesheet" href="../assets/css/chattr.css">
+  <style>
+    body { display: block; }
+    .lab-wrap { max-width: 680px; margin: 0 auto; padding: 24px 16px 60px; }
+    .lab-head { margin-bottom: 18px; }
+    .lab-head h1 { font-size: 22px; margin: 0 0 4px; }
+    .lab-head a { color: #1d9bf0; font-size: 13px; }
+    .lab-note {
+      background: #16181c; border: 1px solid #2f3336; border-radius: 12px;
+      padding: 12px 14px; font-size: 13px; color: #9aa0a6; margin-bottom: 20px;
+    }
+    .lab-form textarea {
+      width: 100%; min-height: 130px; background: #16181c; color: #e7e9ea;
+      border: 1px solid #2f3336; border-radius: 12px; padding: 12px 14px;
+      font: inherit; font-size: 15px; resize: vertical; box-sizing: border-box;
+    }
+    .lab-row { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
+    .lab-row label { font-size: 13px; color: #9aa0a6; }
+    .lab-row input[type="number"] {
+      width: 64px; background: #16181c; color: #e7e9ea; border: 1px solid #2f3336;
+      border-radius: 8px; padding: 6px 8px; font: inherit;
+    }
+    #generate-btn {
+      margin-left: auto; background: #1d9bf0; color: #fff; font-weight: 700;
+      border: none; border-radius: 9999px; padding: 10px 22px; font-size: 15px;
+      cursor: pointer;
+    }
+    #generate-btn:disabled { opacity: .5; cursor: default; }
+    #status { min-height: 18px; font-size: 13px; color: #9aa0a6; margin-top: 10px; }
+    #status.error { color: #f4212e; }
+    #feed .post:first-child { border-top: 1px solid #2f3336; margin-top: 16px; }
+  </style>
+</head>
+<body>
+  <div class="lab-wrap">
+    <div class="lab-head">
+      <h1>🧪 Chattr Lab</h1>
+      <a href="../index.html">← Volver al hub</a>
+    </div>
+    <div class="lab-note">
+      Experimento aislado: pegá el resumen de los últimos partidos y Gemini genera
+      una tanda de posts al estilo Chattr, en el momento. <strong>No se guarda en
+      ningún lado</strong> — si refrescás la página, se pierde. No afecta al Chattr
+      real ni a los datos del sitio.
+    </div>
+
+    <div class="lab-form">
+      <textarea id="matches-input" placeholder="Ej: Chelsea 2-1 Aston Villa (gol de Enzo y penal de João Pedro, casi nos empatan en el 89'). Antes, 1-1 con Newcastle. Fofana salió lesionado del segundo partido."></textarea>
+      <div class="lab-row">
+        <label for="count-input">Cantidad de posts</label>
+        <input type="number" id="count-input" value="12" min="1" max="30">
+        <button id="generate-btn">Generar posts</button>
+      </div>
+      <div id="status"></div>
+    </div>
+
+    <div id="feed"></div>
+  </div>
+
+  <script src="../assets/js/common.js"></script>
+  <script src="../assets/js/chattr-render.js"></script>
+  <script src="config.js"></script>
+  <script src="generator.js"></script>
+</body>
+</html>
