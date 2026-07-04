@@ -7,6 +7,7 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%231d9bf0' d='M21.3 6.4c-.65.29-1.35.48-2.08.57a3.63 3.63 0 0 0 1.59-2c-.7.41-1.47.71-2.29.87a3.61 3.61 0 0 0-6.24 2.47c0 .28.03.56.09.82A10.25 10.25 0 0 1 4.93 5.4a3.6 3.6 0 0 0 1.12 4.82 3.58 3.58 0 0 1-1.64-.45v.05a3.61 3.61 0 0 0 2.9 3.54c-.3.08-.63.13-.96.13-.23 0-.46-.02-.68-.07a3.62 3.62 0 0 0 3.37 2.51 7.25 7.25 0 0 1-4.48 1.55c-.29 0-.58-.02-.86-.05a10.2 10.2 0 0 0 5.54 1.63c6.65 0 10.29-5.51 10.29-10.29l-.01-.47a7.35 7.35 0 0 0 1.81-1.87z'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="../assets/css/common.css">
   <link rel="stylesheet" href="../assets/css/chattr.css">
+  <link rel="stylesheet" href="../assets/css/threadit-render.css">
   <style>
     body { display: block; }
     .lab-wrap { max-width: 680px; margin: 0 auto; padding: 24px 16px 60px; }
@@ -37,6 +38,11 @@
     #status { min-height: 18px; font-size: 13px; color: #9aa0a6; margin-top: 10px; }
     #status.error { color: #f4212e; }
     #feed .post:first-child { border-top: 1px solid #2f3336; margin-top: 16px; }
+    .lab-section-title {
+      font-size: 15px; font-weight: 700; color: #71767b; text-transform: uppercase;
+      letter-spacing: .04em; margin: 28px 0 4px;
+    }
+    .lab-thread { margin-bottom: 16px; }
   </style>
 </head>
 <body>
@@ -62,11 +68,16 @@
       <div id="status"></div>
     </div>
 
+    <div class="lab-section-title">Posts generados (Chattr)</div>
     <div id="feed"></div>
+
+    <div class="lab-section-title">Hilos generados (Threadit)</div>
+    <div id="threads-feed"></div>
   </div>
 
   <script src="../assets/js/common.js"></script>
   <script src="../assets/js/chattr-render.js"></script>
+  <script src="../assets/js/threadit-render.js"></script>
   <script src="config.js"></script>
   <script src="generator.js"></script>
 </body>
