@@ -1,22 +1,17 @@
 {
-  "currentDate": "22 February 2026",
+  "currentDate": "15 March 2026",
   "season": "2025/26",
   "table": [
-    { "pos": 1, "team": "Arsenal", "p": 27, "gd": "+29", "pts": 59 },
-    { "pos": 2, "team": "Aston Villa", "p": 27, "gd": "+15", "pts": 58 },
-    { "pos": 3, "team": "Man City", "p": 27, "gd": "+31", "pts": 53 },
-    { "pos": 4, "team": "Chelsea", "p": 27, "gd": "+28", "pts": 49, "us": true },
-    { "pos": 5, "team": "Liverpool", "p": 26, "gd": "+8", "pts": 46 },
-    { "pos": 6, "team": "Brighton", "p": 27, "gd": "+6", "pts": 40 },
-    { "pos": 7, "team": "Newcastle", "p": 27, "gd": "+6", "pts": 39 },
-    { "pos": 8, "team": "Spurs", "p": 26, "gd": "+8", "pts": 38 }
+    { "pos": 1, "team": "Arsenal", "p": 31, "gd": "+34", "pts": 67 },
+    { "pos": 2, "team": "Aston Villa", "p": 29, "gd": "+17", "pts": 64 },
+    { "pos": 3, "team": "Man City", "p": 30, "gd": "+40", "pts": 62 },
+    { "pos": 4, "team": "Liverpool", "p": 30, "gd": "+11", "pts": 54 },
+    { "pos": 5, "team": "Chelsea", "p": 30, "gd": "+24", "pts": 50, "us": true },
+    { "pos": 6, "team": "Spurs", "p": 30, "gd": "+13", "pts": 46 }
   ],
-  "form": ["W", "W", "W", "W", "W"],
+  "form": ["W", "W", "L", "L", "D"],
   "fixtures": [
-    { "comp": "Premier League", "date": "Sun 1 Mar", "opponent": "Arsenal", "home": false },
-    { "comp": "Premier League", "date": "Wed 4 Mar", "opponent": "Aston Villa", "home": false },
-    { "comp": "FA Cup · Quarter-final", "date": "Sun 8 Mar", "opponent": "Birmingham", "home": true },
-    { "comp": "Premier League", "date": "Sat 14 Mar", "opponent": "Newcastle", "home": true },
+    { "comp": "Champions League · R16, 2nd leg", "date": "Wed 18 Mar", "opponent": "Galatasaray", "home": true },
     { "comp": "Premier League", "date": "Sat 21 Mar", "opponent": "Everton", "home": false },
     { "comp": "Carabao Cup · FINAL · Wembley", "date": "Sun 22 Mar", "opponent": "Man City", "home": true }
   ]

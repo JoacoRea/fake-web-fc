@@ -14,6 +14,14 @@
     ],
     "meta": "8,912 votes · Final results"
   },
+  "panic": {
+    "options": [
+      { "label": "It's fine, the run gets easier", "pct": 38 },
+      { "label": "Genuinely worried", "pct": 41 },
+      { "label": "Ask me after Galatasaray", "pct": 21 }
+    ],
+    "meta": "6,204 votes · Final results"
+  },
   "pots": {
     "options": [
       { "label": "Moisés Caicedo", "pct": 44 },

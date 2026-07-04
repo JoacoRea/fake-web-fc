@@ -46,10 +46,13 @@ Los personajes recurrentes (mantener su personalidad al generar contenido nuevo)
 | `u/KTBFFH_1905` | La memoria histórica, comentarios sensatos |
 | `u/KepaApologist` | Sigue defendiendo a Kepa, siempre downvoteado |
 
-> Estado actual del save (22 Feb 2026, DT **Xabi Alonso**): 4º con 49 pts, 5 victorias seguidas,
-> finalista de Carabao vs Man City (Wembley, 22 Mar), FA Cup en cuartos vs Birmingham,
-> UCL clasificado directo a octavos (6º en fase liga). Enzo y João Pedro 14 goles; Neves y Gordon 8 asistencias.
-> Drama central: la venta de Cole Palmer y la salida de Reece James en plena reconstrucción de 12 fichajes.
+> Estado actual del save (15 Mar 2026, DT **Xabi Alonso**): 5º con 50 pts tras un tramo irregular
+> en liga (derrotas vs Arsenal 0-3 y Aston Villa 1-2, empate 1-1 con Newcastle con gol de Kubo en
+> el 96'), pero brillante en las copas: semifinales de FA Cup (3-0 a Birmingham, doblete de Kubo,
+> gran debut de Perrone) y ventaja 3-1 de visitante en la ida de octavos de Champions vs Galatasaray
+> (partidazo de Neves). Semana decisiva por delante: vuelta vs Galatasaray, Everton, y la final de
+> la Carabao vs Man City en Wembley, todo en 5 días. Drama central: la venta de Cole Palmer y la
+> salida de Reece James en plena reconstrucción de 12 fichajes.
 
 ---
 *Proyecto personal de diversión para un save de FC 26. Sin afiliación con nadie. KTBFFH 💙*
