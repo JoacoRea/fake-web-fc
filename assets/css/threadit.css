@@ -46,7 +46,20 @@ a { color: inherit; text-decoration: none; }
   border-radius: 9999px; padding: 6px 18px; font-size: 13px; cursor: pointer;
 }
 
+.sub-nav {
+  background: #0d1719; border-bottom: 1px solid #22333a;
+  display: flex; gap: 8px; max-width: 1050px; margin: 0 auto; padding: 10px 16px;
+}
+.sub-nav-item {
+  font-size: 13px; font-weight: 600; color: #818b90; padding: 6px 14px;
+  border-radius: 9999px; border: 1px solid #22333a;
+}
+.sub-nav-item:hover { color: #d7dadc; border-color: #3b525c; }
+.sub-nav-item.active { background: #1a282d; color: #d7dadc; border-color: #3b525c; }
+
 .page { max-width: 1050px; margin: 18px auto; display: grid; grid-template-columns: minmax(0, 1fr) 312px; gap: 20px; padding: 0 16px; }
+
+.t-empty { color: #818b90; font-size: 14px; padding: 24px; text-align: center; }
 
 .t-tabs { display: flex; gap: 8px; margin-bottom: 12px; }
 .tab { background: #101b1e; border: 1px solid #22333a; border-radius: 9999px; padding: 6px 14px; font-size: 13px; color: #818b90; cursor: pointer; }
