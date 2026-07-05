@@ -93,15 +93,6 @@ function commentCount(t) {
   return t.comments.reduce((n, c) => n + 1 + (c.replies || []).length, 0);
 }
 
-function threadImageHTML(t, cls) {
-  const images = t.images || (t.image ? [t.image] : []);
-  if (images.length === 0) return "";
-  const imgs = images.map(src =>
-    `<img class="t-image ${cls || ""}" src="${esc(src)}" alt="" loading="lazy" onerror="this.style.display='none'">`
-  ).join("");
-  return images.length > 1 ? `<div class="t-image-gallery">${imgs}</div>` : imgs;
-}
-
 function cardHTML(t) {
   return `
     <article class="t-card" onclick="location.hash='#/r/${t.sub}/thread/${t.id}'">
@@ -114,7 +105,6 @@ function cardHTML(t) {
         <div class="t-meta">${flairHTML(t.flair)} Posted by ${userTag(t.author)} · ${esc(t.time)}</div>
         <h2 class="t-title">${esc(t.title)}</h2>
         <div class="t-preview">${rich(t.body.split("\n")[0])}</div>
-        ${threadImageHTML(t, "t-image-card")}
         <div class="t-foot">${BUBBLE}<span>${commentCount(t)} comments</span></div>
       </div>
     </article>`;
@@ -135,9 +125,8 @@ function commentHTML(c, isReply) {
     </div>`;
 }
 
-// Title + meta + body + optional image, without the "back to subreddit" link
-// — reused by the full threadViewHTML() on the real site and directly by
-// generator/index.html.
+// Title + meta + body, without the "back to subreddit" link — reused by the
+// full threadViewHTML() on the real site and directly by generator/index.html.
 function threadBodyHTML(t) {
   return `
     <article class="t-card t-open">
@@ -150,7 +139,6 @@ function threadBodyHTML(t) {
         <div class="t-meta">${flairHTML(t.flair)} Posted by ${userTag(t.author)} · ${esc(t.time)}</div>
         <h1 class="t-title">${esc(t.title)}</h1>
         <div class="t-full">${rich(t.body)}</div>
-        ${threadImageHTML(t, "t-image-full")}
       </div>
     </article>`;
 }

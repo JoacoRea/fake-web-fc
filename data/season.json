@@ -1,20 +1,18 @@
 {
-  "currentDate": "1 April 2026",
+  "currentDate": "12 April 2026",
   "season": "2025/26",
   "table": [
     { "pos": 1, "team": "Arsenal", "p": 31, "gd": "+34", "pts": 67 },
     { "pos": 2, "team": "Aston Villa", "p": 30, "gd": "+17", "pts": 67 },
-    { "pos": 3, "team": "Man City", "p": 30, "gd": "+40", "pts": 62 },
+    { "pos": 3, "team": "Man City", "p": 31, "gd": "+39", "pts": 62 },
     { "pos": 4, "team": "Liverpool", "p": 31, "gd": "+11", "pts": 55 },
-    { "pos": 5, "team": "Chelsea", "p": 31, "gd": "+22", "pts": 50, "us": true }
+    { "pos": 5, "team": "Chelsea", "p": 32, "gd": "+23", "pts": 53, "us": true }
   ],
-  "form": ["W", "L", "L", "D", "L"],
+  "form": ["L", "L", "D", "L", "W"],
   "fixtures": [
-    { "comp": "FA Cup · Semi-final", "date": "Sat 4 Apr", "opponent": "Leeds", "home": true },
-    { "comp": "Champions League · Quarter-final, 1st leg", "date": "Wed 8 Apr", "opponent": "Atlético Madrid", "home": true },
-    { "comp": "Premier League", "date": "Sat 11 Apr", "opponent": "Man City", "home": true },
     { "comp": "Champions League · Quarter-final, 2nd leg", "date": "Tue 14 Apr", "opponent": "Atlético Madrid", "home": false },
     { "comp": "Premier League", "date": "Sat 18 Apr", "opponent": "Manchester United", "home": true },
-    { "comp": "Premier League", "date": "Tue 21 Apr", "opponent": "Brighton", "home": false }
+    { "comp": "Premier League", "date": "Tue 21 Apr", "opponent": "Brighton", "home": false },
+    { "comp": "FA Cup · Semi-final (Wembley)", "date": "Sat 25 Apr", "opponent": "Tottenham", "home": true }
   ]
 }
