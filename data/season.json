@@ -10,6 +10,7 @@
   ],
   "form": ["W", "L", "L", "D", "L"],
   "fixtures": [
+    { "comp": "FA Cup · Semi-final", "date": "Sat 4 Apr", "opponent": "Leeds", "home": true },
     { "comp": "Champions League · Quarter-final, 1st leg", "date": "Wed 8 Apr", "opponent": "Atlético Madrid", "home": true },
     { "comp": "Premier League", "date": "Sat 11 Apr", "opponent": "Man City", "home": true },
     { "comp": "Champions League · Quarter-final, 2nd leg", "date": "Tue 14 Apr", "opponent": "Atlético Madrid", "home": false },

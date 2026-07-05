@@ -94,7 +94,12 @@ function commentCount(t) {
 }
 
 function threadImageHTML(t, cls) {
-  return t.image ? `<img class="t-image ${cls || ""}" src="${esc(t.image)}" alt="" loading="lazy" onerror="this.style.display='none'">` : "";
+  const images = t.images || (t.image ? [t.image] : []);
+  if (images.length === 0) return "";
+  const imgs = images.map(src =>
+    `<img class="t-image ${cls || ""}" src="${esc(src)}" alt="" loading="lazy" onerror="this.style.display='none'">`
+  ).join("");
+  return images.length > 1 ? `<div class="t-image-gallery">${imgs}</div>` : imgs;
 }
 
 function cardHTML(t) {

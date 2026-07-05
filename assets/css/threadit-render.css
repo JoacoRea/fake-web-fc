@@ -60,3 +60,8 @@ h1.t-title { font-size: 21px; }
 .t-image { display: block; border-radius: 8px; max-width: 100%; }
 .t-image-card { margin-top: 8px; max-height: 320px; object-fit: cover; width: 100%; }
 .t-image-full { margin-top: 12px; max-height: 520px; object-fit: contain; background: #05090a; }
+
+.t-image-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+.t-image-gallery .t-image { margin-top: 0; height: 100%; }
+.t-image-gallery .t-image-full { max-height: 340px; }
+@media (max-width: 600px) { .t-image-gallery { grid-template-columns: 1fr; } }
