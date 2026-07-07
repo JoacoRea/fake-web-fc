@@ -2,14 +2,21 @@
 
 Un script Lua que corre dentro de **[FC-26 Live Editor](https://github.com/xAranaktu/FC-26-Live-Editor)**
 (la herramienta de la comunidad que inyecta un DLL en el proceso de FC 26 para leer
-memoria en tiempo real). Cada 5 partidos jugados en tu save, escribe un archivo de
-texto local con la tabla de posiciones, resultados recientes, próximos fixtures y
-goleadores/asistencias. Vos abrís ese archivo, copiás el contenido, y lo pegás en un
-chat de Claude Code sobre este repo — Claude actualiza el sitio con esa información,
-igual que viene haciendo hasta ahora.
+memoria en tiempo real). Cada 5 partidos completados en tu save (jugados o simulados),
+escribe un archivo de texto local con la tabla de posiciones, resultados recientes,
+próximos fixtures y goleadores/asistencias. Vos abrís ese archivo, copiás el contenido,
+y lo pegás en un chat de Claude Code sobre este repo — Claude actualiza el sitio con esa
+información, igual que viene haciendo hasta ahora.
 
 **No hay tokens, credenciales, ni conexión a internet involucrados.** El script solo
 lee memoria del juego y escribe un archivo `.txt` local.
+
+> El script está construido sobre la API real de Live Editor, verificada contra el
+> código fuente de los scripts oficiales `export_fixtures.lua`, `export_season_stats.lua`
+> y `track_cm_events.lua` (y la wiki [LUA API v2](https://github.com/xAranaktu/FC-26-Live-Editor/wiki/LUA-API-v2-Events)).
+> Ya **no hace falta calibrar ningún nombre de evento a mano**: usa los enums
+> documentados `ENUM_CM_EVENT_MSG_USER_MATCH_COMPLETED` / `..._IN_TOURNAMENT` /
+> `..._DAY_PASSED` (con fallback automático por nombre si tu versión no los trae).
 
 ## Setup (una sola vez)
 
@@ -18,54 +25,46 @@ lee memoria del juego y escribe un archivo `.txt` local.
 2. **Copiar el script**: copiá `export_every_5_matches.lua` (este archivo) a la
    carpeta `lua/` de Live Editor en tu PC, junto a los scripts oficiales de ejemplo
    (`export_fixtures.lua`, `export_season_stats.lua`, `track_cm_events.lua`).
-3. **Calibrar el nombre del evento (única vez, ~5 minutos)**:
-   1. Iniciá FC 26, cargá tu save de Chelsea, y conectá Live Editor.
-   2. En Live Editor: **Lua Engine → Execute** sobre el `track_cm_events.lua`
-      *oficial* (no el nuestro todavía).
-   3. Jugá o simulá un partido completo.
-   4. Leé en la consola/log de Live Editor el listado de nombres de eventos que se
-      van imprimiendo (este evento se dispara muy seguido, para toda acción del
-      modo carrera). Identificá el que corresponde a "partido recién terminado" —
-      típicamente aparece una vez, justo después del resultado final.
-   5. Abrí `export_every_5_matches.lua` y reemplazá:
-      ```lua
-      local TARGET_EVENT_NAME = "REPLACE_WITH_CALIBRATED_EVENT_NAME"
-      ```
-      con el nombre exacto que viste en la consola.
-4. **(Opcional) Elegir carpeta de salida**: por defecto, el archivo se escribe al
-   lado del script. Si preferís otra ubicación (por ejemplo el Escritorio), editá:
+3. **(Opcional) Ajustar la config** al principio del script:
    ```lua
-   local OUTPUT_DIR = "C:\\Users\\vos\\Desktop\\"
+   local CLUB_NAME          = "Chelsea"          -- tu club
+   local LEAGUE_NAME        = "Premier League"   -- qué tabla imprimir
+   local MATCHES_PER_EXPORT = 5                  -- cada cuántos partidos exportar
+   local OUTPUT_DIR         = ...                -- por defecto: el Escritorio
    ```
+   Por defecto los exports (y el archivito de estado que lleva la cuenta de partidos)
+   se escriben en el **Escritorio** (`%USERPROFILE%\Desktop\`).
 
 ## Cada sesión de juego
 
-No hay autoload confirmado en Live Editor, así que hay que repetir esto una vez por
+Live Editor no autocarga scripts propios, así que hay que repetir esto una vez por
 sesión:
 
-1. Iniciá FC 26 y conectá Live Editor como siempre.
-2. **Lua Engine → Execute** sobre `export_every_5_matches.lua`.
-3. Jugá normalmente. El contador de partidos jugados persiste entre sesiones (se
-   guarda en un archivo de estado al lado del script), así que no importa si cerrás
+1. Iniciá FC 26, cargá tu save de Chelsea, y conectá Live Editor.
+2. **Features → Lua Engine → Execute** sobre `export_every_5_matches.lua`.
+3. Jugá normalmente. El contador de partidos persiste entre sesiones (se guarda en
+   `fake_web_fc_last_export.txt` junto a los exports), así que no importa si cerrás
    y volvés a abrir el juego — el conteo hacia el próximo export sigue donde quedó.
+   Además, al ejecutar el script se hace un chequeo inmediato: si quedó un export
+   pendiente de la sesión anterior, sale al toque.
 
 ## Cómo usarlo
 
-Cada 5 partidos jugados, aparece un archivo nuevo `fake_web_fc_export_<fecha>.txt`.
-Contiene algo así:
+Cada 5 partidos completados, aparece un archivo nuevo `fake_web_fc_export_<fecha>.txt`
+en el Escritorio. Contiene algo así:
 
 ```
 === FAKE-WEB-FC SAVE EXPORT ===
-Generated: 2026-03-01 22:14
-Chelsea - matches played: 30
+Generated: 2026-03-01 22:14 (in-save date: 2026-03-01)
+Chelsea - matches completed this season (all comps): 38
 
--- LEAGUE TABLE --
- 1. Arsenal              P30 W20 D8  L2  GD+31 Pts 68
+-- PREMIER LEAGUE TABLE --
+ 1. Arsenal                P30 W20 D8  L2  GD +31 Pts 68
  ...
- 4. Chelsea               P30 W16 D7  L7  GD+30 Pts 55  <-- US
+ 4. Chelsea                P30 W16 D7  L7  GD +30 Pts 55  <-- US
  ...
 
--- RECENT RESULTS (since last export) --
+-- RECENT RESULTS (last 5) --
 2026-02-22 [Premier League] Chelsea 2-1 Arsenal
 ...
 
@@ -73,8 +72,8 @@ Chelsea - matches played: 30
 2026-03-08 [FA Cup] vs Birmingham
 ...
 
--- TOP SCORERS / ASSISTS (season so far) --
-Enzo Fernández       Apps:28  Goals:15  Assists:9   Avg:7.8  MOTM:6
+-- TOP SCORERS / ASSISTS (season so far, all comps) --
+Enzo Fernández         Apps:28  Goals:15  Assists:9   Avg:7.80 MOTM:6
 ...
 
 === END OF EXPORT -- copy everything above into your Claude Code chat ===
@@ -87,11 +86,18 @@ capture — fichajes, dramas, lesiones, lo que quieras — y Claude actualiza
 
 ## Si algo no funciona
 
-Los nombres de campo usados en el script (`row.WinsHome`, `mgr:GetSquadPlayers`,
-etc.) son una reconstrucción de buena fe basada en el comportamiento documentado de
-los scripts oficiales `export_fixtures.lua` / `export_season_stats.lua` — no su
-código fuente literal. Si al ejecutar ves errores en la consola de Live Editor
-(`GetValidStandings failed`, `GetSquadPlayers failed`, etc.), compará esos nombres
-contra tu copia local de esos dos scripts oficiales y ajustá los que no coincidan.
-Esto se puede resolver fácilmente pidiéndole ayuda a Claude en una sesión local en
-tu PC, donde se puede iterar directo sobre el archivo.
+- **Lectores de memoria**: las funciones `GetValidStandings` / `GetValidFixtures` /
+  `GetStandingsByIndex` están copiadas literalmente del `export_fixtures.lua` oficial
+  (offsets de memoria incluidos). Si una actualización del juego o de Live Editor los
+  rompe, van a fallar igual en el script oficial — compará con tu copia local y copiá
+  los offsets nuevos.
+- **Eventos**: si en la consola aparece
+  `NOTE: career_mode/enums not found -- matching events by name instead`, el script
+  sigue funcionando matcheando nombres de evento (`MATCH_COMPLETED`, `DAY_PASSED`).
+  Podés verificar los nombres reales ejecutando el `track_cm_events.lua` oficial.
+- **Fechas raras en los fixtures**: el campo de fecha en memoria no está documentado;
+  el script prueba varios formatos conocidos y si no reconoce ninguno imprime el
+  número crudo (que igual ordena cronológicamente). Los resultados siguen siendo
+  usables — Claude puede deducir las fechas por contexto.
+- Cualquier otro error se puede resolver pidiéndole ayuda a Claude en una sesión
+  local en tu PC, donde se puede iterar directo sobre el archivo.
