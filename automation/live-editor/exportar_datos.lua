@@ -26,6 +26,11 @@ assert(IsInCM(), "Script must be executed in career mode")
 -- CONFIG
 -- =====================================================================
 local CLUB_NAME  = "Chelsea"
+-- There are TWO teams named "Chelsea" in the game world (men's and women's --
+-- the first real export came back full of UWCL results and Sam Kerr stats).
+-- The league name pins down which one we mean; auto-detection by most matches
+-- played is only the fallback.
+local LEAGUE_NAME = "Premier League"
 local LAST_N     = 5   -- how many recent results to include
 local NEXT_N     = 5   -- how many upcoming fixtures to include
 local TOP_CONTRIBUTORS    = 10 -- top players by goals+assists
@@ -205,22 +210,30 @@ local function row_played(row)
          + row.mAwayWins + row.mAwayDraws + row.mAwayLosses
 end
 
--- Find our club's standings rows; the one with the most matches played is
--- the league (cups never out-run it), which pins down both the club team
--- id and the league's competition object id.
+-- Find OUR club's league standings row. Team id and competition id must come
+-- from the SAME row, otherwise the two same-named Chelsea teams can split
+-- (men's league table + women's fixtures). Prefer the row whose competition
+-- name matches LEAGUE_NAME; fall back to the row with most matches played.
 local function find_club_and_league(standings)
-    local club_id, league_comp, best_played = nil, nil, -1
+    local best_row, named_row = nil, nil
     for _, row in ipairs(standings) do
         if team_name(row.mTeamId) == CLUB_NAME then
-            club_id = row.mTeamId
-            local p = row_played(row)
-            if p > best_played then
-                best_played = p
-                league_comp = row.mCompObjId
+            if best_row == nil or row_played(row) > row_played(best_row) then
+                best_row = row
+            end
+            if named_row == nil and LEAGUE_NAME ~= "" then
+                local ok, comp = pcall(function()
+                    return GetCompetitionNameByObjID(row.mCompObjId)
+                end)
+                if ok and comp and string.find(comp, LEAGUE_NAME, 1, true) then
+                    named_row = row
+                end
             end
         end
     end
-    return club_id, league_comp
+    local row = named_row or best_row
+    if not row then return nil, nil end
+    return row.mTeamId, row.mCompObjId
 end
 
 local function build_league_table(standings, league_comp)
@@ -356,8 +369,10 @@ end
 
 local function score_string(m)
     local s = string.format("%d-%d", m.home_score, m.away_score)
-    if (m.home_pens or 0) > 0 or (m.away_pens or 0) > 0 then
-        s = s .. string.format(" (%d-%d pens)", m.home_pens, m.away_pens)
+    local hp, ap = m.home_pens or 0, m.away_pens or 0
+    -- 255 (0xFF) is the game's "no shootout" sentinel, not a real pen count
+    if hp < 100 and ap < 100 and (hp + ap) > 0 then
+        s = s .. string.format(" (%d-%d pens)", hp, ap)
     end
     return s
 end
