@@ -34,12 +34,14 @@ local STATE_FILE      = "fake_web_fc_last_export.txt" -- written next to this sc
 local TOP_SCORERS_CAP = 10
 
 -- =====================================================================
--- CALIBRATION -- the ONE placeholder you must discover yourself.
--- Run the official track_cm_events.lua once, play/sim one match, read the
--- printed event names in the Live Editor console, and find the one that
--- corresponds to "a match just finished" (not documented publicly).
+-- CALIBRATION -- discovered by running the official track_cm_events.lua
+-- and playing a match: Career Mode Event 137, misleadingly named
+-- "JOB_OFFER_ACCEPTED", fires exactly once at the final whistle (followed
+-- ~20s later by the post-match world-update burst: CPU_TRANSFER_INFO,
+-- BOARD_EMAIL_EVENT, ABOUT_TO_INIT_MODE...). If it ever misfires in some
+-- other context the 5-match counter below makes it a harmless no-op.
 -- =====================================================================
-local TARGET_EVENT_NAME = "REPLACE_WITH_CALIBRATED_EVENT_NAME"
+local TARGET_EVENT_NAME = "JOB_OFFER_ACCEPTED"
 
 -- =====================================================================
 -- STATE (only export once every MATCHES_PER_EXPORT new matches played)
@@ -321,6 +323,3 @@ AddEventHandler("pre__CareerModeEvent", on_career_mode_event)
 print("[fake-web-fc] export_every_5_matches.lua loaded.")
 print("[fake-web-fc] Watching for CareerMode event: " .. tostring(TARGET_EVENT_NAME))
 print("[fake-web-fc] Will export a report every " .. MATCHES_PER_EXPORT .. " matches played.")
-if TARGET_EVENT_NAME == "REPLACE_WITH_CALIBRATED_EVENT_NAME" then
-  print("[fake-web-fc] WARNING: TARGET_EVENT_NAME is still a placeholder! Run track_cm_events.lua first.")
-end

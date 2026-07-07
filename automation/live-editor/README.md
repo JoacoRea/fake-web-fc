@@ -18,20 +18,14 @@ lee memoria del juego y escribe un archivo `.txt` local.
 2. **Copiar el script**: copiá `export_every_5_matches.lua` (este archivo) a la
    carpeta `lua/` de Live Editor en tu PC, junto a los scripts oficiales de ejemplo
    (`export_fixtures.lua`, `export_season_stats.lua`, `track_cm_events.lua`).
-3. **Calibrar el nombre del evento (única vez, ~5 minutos)**:
-   1. Iniciá FC 26, cargá tu save de Chelsea, y conectá Live Editor.
-   2. En Live Editor: **Lua Engine → Execute** sobre el `track_cm_events.lua`
-      *oficial* (no el nuestro todavía).
-   3. Jugá o simulá un partido completo.
-   4. Leé en la consola/log de Live Editor el listado de nombres de eventos que se
-      van imprimiendo (este evento se dispara muy seguido, para toda acción del
-      modo carrera). Identificá el que corresponde a "partido recién terminado" —
-      típicamente aparece una vez, justo después del resultado final.
-   5. Abrí `export_every_5_matches.lua` y reemplazá:
-      ```lua
-      local TARGET_EVENT_NAME = "REPLACE_WITH_CALIBRATED_EVENT_NAME"
-      ```
-      con el nombre exacto que viste en la consola.
+3. **Calibración del evento: ya hecha.** El evento de "partido recién terminado"
+   es el **Career Mode Event 137, `JOB_OFFER_ACCEPTED`** (sí, el nombre es
+   engañoso — se descubrió corriendo el `track_cm_events.lua` oficial: dispara
+   exactamente una vez al pitido final, seguido ~20s después por la ráfaga
+   post-partido de `CPU_TRANSFER_INFO` / `BOARD_EMAIL_EVENT` /
+   `ABOUT_TO_INIT_MODE`). El script ya lo trae configurado. Si en tu instalación
+   viera otro comportamiento, repetí la observación con `track_cm_events.lua` y
+   ajustá `TARGET_EVENT_NAME`.
 4. **(Opcional) Elegir carpeta de salida**: por defecto, el archivo se escribe al
    lado del script. Si preferís otra ubicación (por ejemplo el Escritorio), editá:
    ```lua
