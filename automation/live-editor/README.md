@@ -90,13 +90,22 @@ oficial durante un partido y ajustá `TARGET_EVENT_NAME`.
 
 ## Si algo no funciona
 
-Los nombres de campo usados en ambos scripts (`row.WinsHome`,
-`mgr:GetSquadPlayers`, etc.) son una reconstrucción de buena fe basada en el
-comportamiento documentado de los scripts oficiales `export_fixtures.lua` /
-`export_season_stats.lua` — no su código fuente literal. Si al ejecutar ves
-errores en la consola de Live Editor (`GetValidStandings failed`,
-`GetSquadPlayers failed`, etc.), compará esos nombres contra tu copia local de
-esos dos scripts oficiales y ajustá los que no coincidan. Esto se puede resolver
-fácilmente pidiéndole ayuda a Claude en una sesión local en tu PC, donde se
-puede iterar directo sobre el archivo — o pegando el contenido de los dos
-scripts oficiales en el chat para que Claude devuelva la versión corregida.
+El plumbing de lectura de memoria (`GetFCEDataManager`, `GetValidStandings`,
+`GetValidFixtures`, offsets como `+ 0x88`) está copiado **literalmente** del
+`export_fixtures.lua` oficial del repo de Live Editor, y la lectura de
+estadísticas sigue al `export_season_stats.lua` oficial. Dos cosas pueden
+romperse igual:
+
+- **Una actualización de Live Editor cambia los offsets de memoria**: síntoma
+  típico, valores absurdos o crash al leer standings. Solución: comparar contra
+  las copias de esos dos scripts oficiales que vinieron con tu versión de la
+  herramienta (carpeta `lua/`) y ajustar los offsets que difieran.
+- **El formato de fecha de los fixtures** (`mDate`, un entero sin documentar):
+  el script intenta interpretarlo como `yyyymmdd` o como días desde 1582
+  (formato clásico de FC), y si no matchea ninguno imprime el número crudo. Si
+  ves fechas crudas o incoherentes en el `.txt`, pasale a Claude un par de
+  valores crudos junto con la fecha in-game real y se calibra el conversor.
+
+Cualquiera de los dos casos se resuelve pegando el contenido de los scripts
+oficiales (o el `.txt` roto) en el chat para que Claude devuelva la versión
+corregida.
