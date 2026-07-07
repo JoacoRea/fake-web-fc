@@ -1,91 +1,102 @@
-# Export cada 5 partidos (FC-26 Live Editor)
+# Exports del save (FC-26 Live Editor)
 
-Un script Lua que corre dentro de **[FC-26 Live Editor](https://github.com/xAranaktu/FC-26-Live-Editor)**
+Scripts Lua que corren dentro de **[FC-26 Live Editor](https://github.com/xAranaktu/FC-26-Live-Editor)**
 (la herramienta de la comunidad que inyecta un DLL en el proceso de FC 26 para leer
-memoria en tiempo real). Cada 5 partidos jugados en tu save, escribe un archivo de
-texto local con la tabla de posiciones, resultados recientes, próximos fixtures y
-goleadores/asistencias. Vos abrís ese archivo, copiás el contenido, y lo pegás en un
-chat de Claude Code sobre este repo — Claude actualiza el sitio con esa información,
-igual que viene haciendo hasta ahora.
+memoria en tiempo real). Escriben un archivo de texto local con la tabla de
+posiciones, resultados recientes, próximos fixtures y estadísticas del plantel.
+Vos abrís ese archivo, copiás el contenido, y lo pegás en un chat de Claude Code
+sobre este repo — Claude actualiza el sitio con esa información.
 
-**No hay tokens, credenciales, ni conexión a internet involucrados.** El script solo
-lee memoria del juego y escribe un archivo `.txt` local.
+**No hay tokens, credenciales, ni conexión a internet involucrados.** Los scripts
+solo leen memoria del juego y escriben un archivo `.txt` local.
+
+## Los dos scripts
+
+- **`exportar_datos.lua` — manual, el recomendado.** Lo ejecutás cuando VOS
+  decidís que hay material para una actualización del sitio (después de una
+  semana importante, una final, lo que sea). Genera el reporte al instante:
+  tabla completa, últimos 5 resultados con forma (W/D/L), próximos 5 fixtures,
+  top 10 por goles+asistencias y top 5 por rating promedio. Sin hooks de
+  eventos, sin contadores, sin estado — ejecutar el script ES el disparador.
+- **`export_every_5_matches.lua` — automático, opcional.** Queda corriendo y
+  genera el reporte solo, cada 5 partidos jugados. Usa el Career Mode Event 137
+  (`JOB_OFFER_ACCEPTED`, nombre engañoso — dispara una vez al pitido final,
+  descubierto con el `track_cm_events.lua` oficial) y un archivo de estado para
+  el conteo. Útil si algún día querés el loop sin pensar; hoy el flujo real de
+  actualización es irregular, por eso el manual es el principal.
 
 ## Setup (una sola vez)
 
 1. **Instalar Live Editor**: seguí las instrucciones de instalación en
    [github.com/xAranaktu/FC-26-Live-Editor](https://github.com/xAranaktu/FC-26-Live-Editor).
-2. **Copiar el script**: copiá `export_every_5_matches.lua` (este archivo) a la
-   carpeta `lua/` de Live Editor en tu PC, junto a los scripts oficiales de ejemplo
-   (`export_fixtures.lua`, `export_season_stats.lua`, `track_cm_events.lua`).
-3. **Calibración del evento: ya hecha.** El evento de "partido recién terminado"
-   es el **Career Mode Event 137, `JOB_OFFER_ACCEPTED`** (sí, el nombre es
-   engañoso — se descubrió corriendo el `track_cm_events.lua` oficial: dispara
-   exactamente una vez al pitido final, seguido ~20s después por la ráfaga
-   post-partido de `CPU_TRANSFER_INFO` / `BOARD_EMAIL_EVENT` /
-   `ABOUT_TO_INIT_MODE`). El script ya lo trae configurado. Si en tu instalación
-   viera otro comportamiento, repetí la observación con `track_cm_events.lua` y
-   ajustá `TARGET_EVENT_NAME`.
-4. **(Opcional) Elegir carpeta de salida**: por defecto, el archivo se escribe al
+2. **Copiar el script**: copiá `exportar_datos.lua` (y opcionalmente
+   `export_every_5_matches.lua`) a la carpeta `lua/` de Live Editor en tu PC,
+   junto a los scripts oficiales de ejemplo (`export_fixtures.lua`,
+   `export_season_stats.lua`, `track_cm_events.lua`).
+3. **(Opcional) Elegir carpeta de salida**: por defecto, el archivo se escribe al
    lado del script. Si preferís otra ubicación (por ejemplo el Escritorio), editá:
    ```lua
    local OUTPUT_DIR = "C:\\Users\\vos\\Desktop\\"
    ```
 
-## Cada sesión de juego
+## Cómo usarlo (flujo manual)
 
-No hay autoload confirmado en Live Editor, así que hay que repetir esto una vez por
-sesión:
-
-1. Iniciá FC 26 y conectá Live Editor como siempre.
-2. **Lua Engine → Execute** sobre `export_every_5_matches.lua`.
-3. Jugá normalmente. El contador de partidos jugados persiste entre sesiones (se
-   guarda en un archivo de estado al lado del script), así que no importa si cerrás
-   y volvés a abrir el juego — el conteo hacia el próximo export sigue donde quedó.
-
-## Cómo usarlo
-
-Cada 5 partidos jugados, aparece un archivo nuevo `fake_web_fc_export_<fecha>.txt`.
-Contiene algo así:
+1. Iniciá FC 26, cargá tu save de Chelsea, y conectá Live Editor como siempre.
+2. Cuando quieras actualizar el sitio: **Lua Engine → Execute** sobre
+   `exportar_datos.lua`.
+3. Aparece un `fake_web_fc_export_<fecha>.txt` al lado del script. Contiene algo así:
 
 ```
-=== FAKE-WEB-FC SAVE EXPORT ===
-Generated: 2026-03-01 22:14
-Chelsea - matches played: 30
+=== FAKE-WEB-FC SAVE EXPORT (manual) ===
+Generated: 2026-04-12 22:14
 
 -- LEAGUE TABLE --
- 1. Arsenal              P30 W20 D8  L2  GD+31 Pts 68
+ 1. Arsenal              P31 W20 D7  L4  GD+34 Pts 67
  ...
- 4. Chelsea               P30 W16 D7  L7  GD+30 Pts 55  <-- US
- ...
+ 5. Chelsea              P32 W15 D8  L9  GD+23 Pts 53  <-- US
 
--- RECENT RESULTS (since last export) --
-2026-02-22 [Premier League] Chelsea 2-1 Arsenal
+-- LAST 5 RESULTS (all competitions) --
+2026-04-04 [FA Cup] Chelsea 3-0 Leeds  (W)
+...
+Form: W W D L W
+
+-- NEXT 5 FIXTURES --
+2026-04-14 [Champions League] @ Atlético Madrid
 ...
 
--- UPCOMING FIXTURES --
-2026-03-08 [FA Cup] vs Birmingham
+-- TOP 10 BY GOALS+ASSISTS (season) --
+Enzo Fernández       Apps:38  Goals:16  Assists:9   Avg:7.8  MOTM:6
 ...
 
--- TOP SCORERS / ASSISTS (season so far) --
-Enzo Fernández       Apps:28  Goals:15  Assists:9   Avg:7.8  MOTM:6
+-- TOP 5 BY AVG RATING (min 8 apps) --
+Moisés Caicedo       Avg:7.9  Apps:40  MOTM:8
 ...
-
-=== END OF EXPORT -- copy everything above into your Claude Code chat ===
 ```
 
-Abrí el archivo, copiá todo, y pegalo en un chat de Claude Code sobre este repo
-(`joacorea/fake-web-fc`). Contale también cualquier cosa que la memoria del juego no
-capture — fichajes, dramas, lesiones, lo que quieras — y Claude actualiza
-`data/season.json` y escribe posts/hilos nuevos con esa info.
+4. Copiá todo y pegalo en un chat de Claude Code sobre este repo
+   (`joacorea/fake-web-fc`). Contale también cualquier cosa que la memoria del
+   juego no capture — fichajes, dramas, lesiones, despidos de DTs rivales, lo
+   que quieras — y Claude actualiza `data/season.json` y escribe hilos nuevos
+   en los tres subthreadits con esa info.
+
+## Flujo automático (opcional)
+
+Si preferís el export automático cada 5 partidos: una vez por sesión de juego,
+**Lua Engine → Execute** sobre `export_every_5_matches.lua` y jugá normalmente.
+El contador de partidos persiste entre sesiones en un archivo de estado al lado
+del script. La calibración del evento de fin de partido ya está hecha (ver
+arriba); si en tu instalación no disparara, corré el `track_cm_events.lua`
+oficial durante un partido y ajustá `TARGET_EVENT_NAME`.
 
 ## Si algo no funciona
 
-Los nombres de campo usados en el script (`row.WinsHome`, `mgr:GetSquadPlayers`,
-etc.) son una reconstrucción de buena fe basada en el comportamiento documentado de
-los scripts oficiales `export_fixtures.lua` / `export_season_stats.lua` — no su
-código fuente literal. Si al ejecutar ves errores en la consola de Live Editor
-(`GetValidStandings failed`, `GetSquadPlayers failed`, etc.), compará esos nombres
-contra tu copia local de esos dos scripts oficiales y ajustá los que no coincidan.
-Esto se puede resolver fácilmente pidiéndole ayuda a Claude en una sesión local en
-tu PC, donde se puede iterar directo sobre el archivo.
+Los nombres de campo usados en ambos scripts (`row.WinsHome`,
+`mgr:GetSquadPlayers`, etc.) son una reconstrucción de buena fe basada en el
+comportamiento documentado de los scripts oficiales `export_fixtures.lua` /
+`export_season_stats.lua` — no su código fuente literal. Si al ejecutar ves
+errores en la consola de Live Editor (`GetValidStandings failed`,
+`GetSquadPlayers failed`, etc.), compará esos nombres contra tu copia local de
+esos dos scripts oficiales y ajustá los que no coincidan. Esto se puede resolver
+fácilmente pidiéndole ayuda a Claude en una sesión local en tu PC, donde se
+puede iterar directo sobre el archivo — o pegando el contenido de los dos
+scripts oficiales en el chat para que Claude devuelva la versión corregida.
