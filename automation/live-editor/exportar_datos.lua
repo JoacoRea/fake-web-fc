@@ -337,12 +337,18 @@ local function build_squad_stats(club_id)
                 team_of[pid] = (ok2 and tid) or -1
             end
             if team_of[pid] == club_id then
-                local t = totals[pid] or { app = 0, goals = 0, assists = 0, motm = 0, rating_pts = 0 }
+                local t = totals[pid] or { app = 0, rated_app = 0, goals = 0, assists = 0, motm = 0, rating_pts = 0 }
                 t.app = t.app + s.app
                 t.goals = t.goals + (s.goals or 0)
                 t.assists = t.assists + (s.assists or 0)
                 t.motm = t.motm + (s.motm or 0)
-                t.rating_pts = t.rating_pts + (s.avg or 0) / 10
+                -- Some rows carry avg=0 (observed in real exports: high-app
+                -- players dragged to impossible averages like 3.5); average
+                -- only over the appearances that actually carry a rating.
+                if (s.avg or 0) > 0 then
+                    t.rated_app = t.rated_app + s.app
+                    t.rating_pts = t.rating_pts + s.avg / 10
+                end
                 totals[pid] = t
             end
         end
@@ -357,7 +363,7 @@ local function build_squad_stats(club_id)
             goals = t.goals,
             assists = t.assists,
             motm = t.motm,
-            avg_rating = t.app > 0 and (t.rating_pts / t.app) or 0,
+            avg_rating = t.rated_app > 0 and (t.rating_pts / t.rated_app) or 0,
         })
     end
     return list
