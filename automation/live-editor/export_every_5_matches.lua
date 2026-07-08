@@ -39,7 +39,7 @@ local NEXT_N     = 5   -- how many upcoming fixtures to include
 local TOP_CONTRIBUTORS    = 10
 local TOP_RATED           = 5
 local MIN_APPS_FOR_RATING = 8
-local OUTPUT_DIR = string.format("%s\\Desktop\\", os.getenv('USERPROFILE') or ".")
+local OUTPUT_DIR = "C:\\Games\\Exports\\"
 local STATE_FILE = OUTPUT_DIR .. "fake_web_fc_last_export.txt"
 
 local TARGET_EVENT_NAME = "JOB_OFFER_ACCEPTED"

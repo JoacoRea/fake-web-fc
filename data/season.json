@@ -1,18 +1,18 @@
 {
-  "currentDate": "30 April 2026",
+  "currentDate": "9 May 2026",
   "season": "2025/26",
   "table": [
-    { "pos": 1, "team": "Aston Villa", "p": 34, "gd": "+21", "pts": 76 },
-    { "pos": 2, "team": "Arsenal", "p": 34, "gd": "+36", "pts": 74 },
-    { "pos": 3, "team": "Man City", "p": 33, "gd": "+40", "pts": 65 },
-    { "pos": 4, "team": "Liverpool", "p": 34, "gd": "+16", "pts": 62 },
-    { "pos": 5, "team": "Chelsea", "p": 34, "gd": "+25", "pts": 57, "us": true }
+    { "pos": 1, "team": "Aston Villa", "p": 35, "gd": "+22", "pts": 79 },
+    { "pos": 2, "team": "Arsenal", "p": 35, "gd": "+36", "pts": 75 },
+    { "pos": 3, "team": "Man City", "p": 34, "gd": "+42", "pts": 68 },
+    { "pos": 4, "team": "Liverpool", "p": 35, "gd": "+18", "pts": 65 },
+    { "pos": 5, "team": "Chelsea", "p": 35, "gd": "+25", "pts": 58, "us": true }
   ],
-  "form": ["W", "D", "W", "W", "L"],
+  "form": ["W", "W", "L", "D", "D"],
   "fixtures": [
-    { "comp": "Premier League", "date": "Sat 2 May", "opponent": "Nottingham Forest", "home": true },
-    { "comp": "Champions League · Semi-final, 2nd leg", "date": "Tue 5 May", "opponent": "PSG", "home": false },
     { "comp": "Premier League", "date": "Sat 9 May", "opponent": "Liverpool", "home": false },
-    { "comp": "Premier League", "date": "Tue 19 May", "opponent": "Tottenham", "home": true }
+    { "comp": "FA Cup · FINAL (Wembley)", "date": "Sat 16 May", "opponent": "Liverpool", "home": true },
+    { "comp": "Premier League", "date": "Tue 19 May", "opponent": "Tottenham", "home": true },
+    { "comp": "Premier League", "date": "Sun 24 May", "opponent": "Sunderland", "home": false }
   ]
 }

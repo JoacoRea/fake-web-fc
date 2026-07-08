@@ -36,7 +36,7 @@ local NEXT_N     = 5   -- how many upcoming fixtures to include
 local TOP_CONTRIBUTORS    = 10 -- top players by goals+assists
 local TOP_RATED           = 5  -- top players by average rating
 local MIN_APPS_FOR_RATING = 8  -- ignore tiny samples in the ratings ranking
-local OUTPUT_DIR = string.format("%s\\Desktop\\", os.getenv('USERPROFILE') or ".")
+local OUTPUT_DIR = "C:\\Games\\Exports\\"
 
 -- =====================================================================
 -- MEMORY PLUMBING -- copied from the official export_fixtures.lua
