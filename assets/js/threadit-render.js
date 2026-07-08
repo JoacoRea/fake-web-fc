@@ -7,6 +7,8 @@ const BUBBLE = '<svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z" fill="none
 const TAB_HOT = '<svg viewBox="0 0 24 24"><path fill="#ff4500" d="M12 2.7c.4 2.8-.8 4.4-2.1 5.9C8.6 10.1 7.2 11.7 7.2 14a4.8 4.8 0 0 0 9.6 0c0-1.4-.5-2.7-1.3-3.8-.4 1-1 1.7-1.9 2.1.6-2.9-.3-6.7-1.6-9.6z"/></svg>';
 const TAB_NEW = '<svg viewBox="0 0 24 24"><path fill="#f2c744" d="M12 3Q13 11 21 12Q13 13 12 21Q11 13 3 12Q11 11 12 3z"/></svg>';
 const TAB_TOP = '<svg viewBox="0 0 24 24"><path fill="#e2b719" d="M6.5 3.5h11v4a5.5 5.5 0 0 1-4 5.3V15h2.3v2H8.2v-2h2.3v-2.2a5.5 5.5 0 0 1-4-5.3v-4z"/><path d="M6.5 5H4.2a3.3 3.3 0 0 0 3 3.3M17.5 5h2.3a3.3 3.3 0 0 1-3 3.3" fill="none" stroke="#e2b719" stroke-width="1.6" stroke-linecap="round"/></svg>';
+const LOCK_ICON = '<svg viewBox="0 0 24 24"><rect x="5.5" y="10.5" width="13" height="9" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="14.6" r="1.3" fill="currentColor"/><path d="M12 15.6v1.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>';
+const PIN_ICON = '<svg viewBox="0 0 24 24"><path d="M9.4 3.8l10.8 10.8-1.5.4-2.4-.3-2.8 2.8.3 3.3-1.7-.5-3.4-3.4-4.8 3.5 3.5-4.8-3.4-3.4-.5-1.7 3.3.3 2.8-2.8-.3-2.4z" fill="currentColor"/></svg>';
 
 const LION_ICON = '<svg viewBox="0 0 24 24"><g fill="#d78f1e"><circle cx="12" cy="4.7" r="2.8"/><circle cx="17.52" cy="6.98" r="2.8"/><circle cx="19.8" cy="12.5" r="2.8"/><circle cx="17.52" cy="18.02" r="2.8"/><circle cx="12" cy="20.3" r="2.8"/><circle cx="6.48" cy="18.02" r="2.8"/><circle cx="4.2" cy="12.5" r="2.8"/><circle cx="6.48" cy="6.98" r="2.8"/><circle cx="12" cy="12.5" r="8"/></g><circle cx="12" cy="12.9" r="6" fill="#f2c14e"/><ellipse cx="12" cy="15.2" rx="2.7" ry="2.1" fill="#fbe8bd"/><circle cx="9.7" cy="11.5" r=".9" fill="#3d2508"/><circle cx="14.3" cy="11.5" r=".9" fill="#3d2508"/><path d="M10.95 14.1h2.1L12 15.5z" fill="#3d2508"/><path d="M12 15.5v.9" stroke="#3d2508" stroke-width=".9" stroke-linecap="round"/></svg>';
 const BALL_ICON = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="#fff"/><path d="M12 8.8l3.04 2.21-1.16 3.58h-3.76l-1.16-3.58z" fill="#101b1e"/><path d="M12 8.8V4.7M15.04 11.01l4.1-1.33M13.88 14.59l2.53 3.49M10.12 14.59l-2.53 3.49M8.96 11.01l-4.1-1.33" stroke="#101b1e" stroke-width="1.1"/></svg>';
@@ -102,10 +104,10 @@ function cardHTML(t) {
         <span class="vote down">${DOWN}</span>
       </div>
       <div class="t-body">
-        <div class="t-meta">${flairHTML(t.flair)} Posted by ${userTag(t.author)} · ${esc(t.time)}</div>
+        <div class="t-meta">${t.pinned ? `<span class="pinned">${PIN_ICON}Pinned by moderators</span>` : ""}${flairHTML(t.flair)} Posted by ${userTag(t.author)} · ${esc(t.time)}</div>
         <h2 class="t-title">${esc(t.title)}</h2>
         <div class="t-preview">${rich(t.body.split("\n")[0])}</div>
-        <div class="t-foot">${BUBBLE}<span>${commentCount(t)} comments</span></div>
+        <div class="t-foot">${BUBBLE}<span>${commentCount(t)} comments</span>${t.locked ? `<span class="locked-tag">${LOCK_ICON}Locked</span>` : ""}</div>
       </div>
     </article>`;
 }
@@ -136,7 +138,7 @@ function threadBodyHTML(t) {
         <span class="vote down">${DOWN}</span>
       </div>
       <div class="t-body">
-        <div class="t-meta">${flairHTML(t.flair)} Posted by ${userTag(t.author)} · ${esc(t.time)}</div>
+        <div class="t-meta">${t.pinned ? `<span class="pinned">${PIN_ICON}Pinned by moderators</span>` : ""}${flairHTML(t.flair)} Posted by ${userTag(t.author)} · ${esc(t.time)}</div>
         <h1 class="t-title">${esc(t.title)}</h1>
         <div class="t-full">${rich(t.body)}</div>
       </div>
@@ -148,6 +150,7 @@ function threadViewHTML(t) {
     <div class="t-view">
       <a class="back" href="#/r/${t.sub}">← t/${t.sub}</a>
       ${threadBodyHTML(t)}
+      ${t.locked ? `<div class="t-locked">${LOCK_ICON}<span>This thread has been locked by the moderators of t/${esc(t.sub)}. New comments cannot be posted.</span></div>` : ""}
       <div class="c-sort">Sort by: <b>Best</b> · ${commentCount(t)} comments</div>
       <div class="comments">${t.comments.map(c => commentHTML(c, false)).join("")}</div>
     </div>`;

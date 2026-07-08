@@ -19,6 +19,7 @@
 MEMORY = require 'imports/core/memory'
 require 'imports/other/helpers'
 require 'imports/services/enums'
+require 'imports/career_mode/helpers'
 
 assert(IsInCM(), "Script must be executed in career mode")
 
@@ -36,7 +37,11 @@ local NEXT_N     = 5   -- how many upcoming fixtures to include
 local TOP_CONTRIBUTORS    = 10 -- top players by goals+assists
 local TOP_RATED           = 5  -- top players by average rating
 local MIN_APPS_FOR_RATING = 8  -- ignore tiny samples in the ratings ranking
+local BREAKDOWN_PLAYERS   = 6  -- per-competition detail for the top N contributors
 local OUTPUT_DIR = "C:\\Games\\Exports\\"
+-- Squad OVRs are snapshotted here on every run; the report shows the diff
+-- against the previous snapshot ("Paz 80 -> 82"). Delete the file to reset.
+local OVR_STATE_FILE = OUTPUT_DIR .. "fake_web_fc_ovr_state.txt"
 
 -- =====================================================================
 -- MEMORY PLUMBING -- copied from the official export_fixtures.lua
@@ -337,7 +342,7 @@ local function build_squad_stats(club_id)
                 team_of[pid] = (ok2 and tid) or -1
             end
             if team_of[pid] == club_id then
-                local t = totals[pid] or { app = 0, rated_app = 0, goals = 0, assists = 0, motm = 0, rating_pts = 0 }
+                local t = totals[pid] or { app = 0, rated_app = 0, goals = 0, assists = 0, motm = 0, rating_pts = 0, comps = {} }
                 t.app = t.app + s.app
                 t.goals = t.goals + (s.goals or 0)
                 t.assists = t.assists + (s.assists or 0)
@@ -349,6 +354,10 @@ local function build_squad_stats(club_id)
                     t.rated_app = t.rated_app + s.app
                     t.rating_pts = t.rating_pts + s.avg / 10
                 end
+                table.insert(t.comps, {
+                    comp = s.compname or ("Comp " .. tostring(s.compobjid)),
+                    app = s.app, goals = s.goals or 0, assists = s.assists or 0,
+                })
                 totals[pid] = t
             end
         end
@@ -364,9 +373,85 @@ local function build_squad_stats(club_id)
             assists = t.assists,
             motm = t.motm,
             avg_rating = t.rated_app > 0 and (t.rating_pts / t.rated_app) or 0,
+            comps = t.comps,
         })
     end
     return list
+end
+
+-- =====================================================================
+-- SQUAD OVR SNAPSHOT + DIFF -- DB access as in the official
+-- list_players.lua / 99pot_in_given_team.lua (LE.db "players" table,
+-- GetPlayerIDSForTeam). Snapshot persists in OVR_STATE_FILE so each
+-- export reports development since the previous one.
+-- =====================================================================
+
+local function read_ovr_state()
+    local f = io.open(OVR_STATE_FILE, "r")
+    if not f then return nil end
+    local prev = {}
+    for line in f:lines() do
+        local pid, ovr = line:match("^(%d+)=(%d+)$")
+        if pid then prev[tonumber(pid)] = tonumber(ovr) end
+    end
+    f:close()
+    return prev
+end
+
+local function write_ovr_state(current)
+    local f = io.open(OVR_STATE_FILE, "w")
+    if not f then
+        print("[fake-web-fc] WARNING: could not write OVR state file " .. OVR_STATE_FILE)
+        return
+    end
+    for pid, ovr in pairs(current) do
+        f:write(string.format("%d=%d\n", pid, ovr))
+    end
+    f:close()
+end
+
+-- Returns (changes, is_first_snapshot); changes is nil if the DB read failed.
+local function build_ovr_changes(club_id)
+    local ok, team_pids = pcall(function() return GetPlayerIDSForTeam(club_id) end)
+    if not ok or not team_pids then
+        print("[fake-web-fc] GetPlayerIDSForTeam failed: " .. tostring(team_pids))
+        return nil, false
+    end
+
+    local current = {}
+    local ok2, err = pcall(function()
+        local players_table = LE.db:GetTable("players")
+        local rec = players_table:GetFirstRecord()
+        while rec > 0 do
+            local pid = players_table:GetRecordFieldValue(rec, "playerid")
+            if team_pids[pid] then
+                current[pid] = players_table:GetRecordFieldValue(rec, "overallrating")
+            end
+            rec = players_table:GetNextValidRecord()
+        end
+    end)
+    if not ok2 then
+        print("[fake-web-fc] players table read failed: " .. tostring(err))
+        return nil, false
+    end
+
+    local prev = read_ovr_state()
+    write_ovr_state(current)
+    if prev == nil then return {}, true end
+
+    local changes = {}
+    for pid, ovr in pairs(current) do
+        local old = prev[pid]
+        if old and old ~= ovr then
+            local ok3, pname = pcall(function() return GetPlayerName(pid) end)
+            table.insert(changes, {
+                name = (ok3 and pname) or ("Player " .. tostring(pid)),
+                from = old, to = ovr,
+            })
+        end
+    end
+    table.sort(changes, function(a, b) return (a.to - a.from) > (b.to - b.from) end)
+    return changes, false
 end
 
 -- =====================================================================
@@ -383,7 +468,7 @@ local function score_string(m)
     return s
 end
 
-local function format_report(table_rows, upcoming, recent, squad)
+local function format_report(table_rows, upcoming, recent, squad, ovr_changes, ovr_first)
     local lines = {}
     local function add(s) table.insert(lines, s or "") end
 
@@ -458,6 +543,36 @@ local function format_report(table_rows, upcoming, recent, squad)
         ))
     end
     add("")
+
+    add(string.format("-- BREAKDOWN BY COMPETITION (top %d contributors) --", BREAKDOWN_PLAYERS))
+    for i = 1, math.min(BREAKDOWN_PLAYERS, #squad) do
+        local p = squad[i]
+        add(p.name .. ":")
+        for _, c in ipairs(p.comps or {}) do
+            if c.app > 0 then
+                add(string.format("  %-28s Apps:%-3d G:%-3d A:%d", c.comp, c.app, c.goals, c.assists))
+            end
+        end
+    end
+    add("")
+
+    add("-- OVR CHANGES SINCE LAST EXPORT --")
+    if ovr_changes == nil then
+        add("(unavailable: squad DB read failed, see Live Editor console)")
+    elseif ovr_first then
+        add("(first snapshot saved; changes will appear from the next export)")
+    elseif #ovr_changes == 0 then
+        add("(none)")
+    else
+        for _, ch in ipairs(ovr_changes) do
+            local delta = ch.to - ch.from
+            add(string.format(
+                "%-24s %d -> %d (%s%d)",
+                ch.name, ch.from, ch.to, delta > 0 and "+" or "", delta
+            ))
+        end
+    end
+    add("")
     add("=== END OF EXPORT ===")
     add("Copy everything above into your Claude Code chat, plus anything the")
     add("game's memory can't capture: transfers, injuries, dressing-room drama,")
@@ -502,5 +617,6 @@ end
 local table_rows = build_league_table(standings, league_comp)
 local upcoming, recent = build_fixtures_and_results(GetValidFixtures(), club_id)
 local squad = build_squad_stats(club_id)
+local ovr_changes, ovr_first = build_ovr_changes(club_id)
 
-write_report_file(format_report(table_rows, upcoming, recent, squad))
+write_report_file(format_report(table_rows, upcoming, recent, squad, ovr_changes, ovr_first))

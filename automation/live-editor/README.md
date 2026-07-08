@@ -16,8 +16,12 @@ solo leen memoria del juego y escriben un archivo `.txt` local.
   decidís que hay material para una actualización del sitio (después de una
   semana importante, una final, lo que sea). Genera el reporte al instante:
   tabla completa, últimos 5 resultados con forma (W/D/L), próximos 5 fixtures,
-  top 10 por goles+asistencias y top 5 por rating promedio. Sin hooks de
-  eventos, sin contadores, sin estado — ejecutar el script ES el disparador.
+  top 10 por goles+asistencias, top 5 por rating promedio, desglose por
+  competición de los 6 máximos contribuyentes, y **cambios de OVR del plantel
+  desde el export anterior** (guarda un snapshot en
+  `fake_web_fc_ovr_state.txt`; la primera corrida solo saca la foto, a partir
+  de la segunda reporta subas/bajas tipo "Nico Paz 80 -> 82 (+2)"). Sin hooks
+  de eventos ni contadores — ejecutar el script ES el disparador.
 - **`export_every_5_matches.lua` — automático, opcional.** Queda corriendo y
   genera el reporte solo, cada 5 partidos jugados. Usa el Career Mode Event 137
   (`JOB_OFFER_ACCEPTED`, nombre engañoso — dispara una vez al pitido final,

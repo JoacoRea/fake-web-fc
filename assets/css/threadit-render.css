@@ -33,6 +33,7 @@ h1.t-title { font-size: 21px; }
 
 .flair { border-radius: 9999px; padding: 2px 9px; font-size: 11px; font-weight: 700; color: #fff; background: #565d61; }
 .flair-post-match-thread { background: #00a651; }
+.flair-pre-match-thread { background: #0d8a8a; }
 .flair-transfer-news { background: #c47f17; }
 .flair-official-source { background: #034694; }
 .flair-analysis { background: #6f42c1; }
@@ -56,3 +57,14 @@ h1.t-title { font-size: 21px; }
 .c-foot.neg .score { color: #e0245e; }
 .c-foot svg { width: 15px; height: 15px; }
 .c-reply { margin-left: 8px; font-weight: 700; cursor: pointer; }
+
+.pinned { color: #46d160; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; }
+.pinned svg { width: 13px; height: 13px; }
+.locked-tag { display: inline-flex; align-items: center; gap: 4px; color: #e8b339; margin-left: 6px; }
+.locked-tag svg { width: 14px; height: 14px; }
+.t-locked {
+  display: flex; align-items: center; gap: 10px; margin-top: 12px;
+  background: #241f10; border: 1px solid #5c4d1e; color: #e8b339;
+  border-radius: 8px; padding: 10px 14px; font-size: 13px; font-weight: 600;
+}
+.t-locked svg { width: 17px; height: 17px; flex-shrink: 0; }

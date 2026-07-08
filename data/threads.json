@@ -1,5 +1,35 @@
 [
   {
+    "id": "prematch-fa-cup-final",
+    "sub": "chelseafc",
+    "flair": "Pre-Match Thread",
+    "title": "Pre-Match Thread: Chelsea vs Liverpool — FA CUP FINAL · Wembley Stadium · Saturday 16 May, 17:30",
+    "author": "StamfordBridgeCat",
+    "time": "9 May 2026",
+    "upvotes": "4.8k",
+    "pinned": true,
+    "body": "One week today.\n\nCompetition: Emirates FA Cup — FINAL\nVenue: Wembley Stadium, London\nDate/Time: Saturday 16 May, 17:30 BST\nOpponent: Liverpool (4th, 65 pts — we also visit Anfield in the league TODAY, because the schedule maker is a comedian)\n\nSecond final of the season. A win means a cup double in year one of the rebuild. Post your predicted lineups, score predictions and coping strategies below. This thread stays pinned until kickoff.",
+    "comments": [
+      { "author": "WembleyWayWalker", "time": "9 May 2026", "upvotes": "934", "text": "Third trip to Wembley this season. My bank account is in ruins, my scarf collection is thriving, and I would not change a single thing. 2-1 us.", "replies": [] },
+      {
+        "author": "xabi_ball_enjoyer", "time": "9 May 2026", "upvotes": "678",
+        "text": "Tactical prediction: whatever XI plays at Anfield today is a decoy, and the final XI has Kubo starting. He's been the best player in the squad per minute all spring and finals are won by exactly that profile.",
+        "replies": [ { "author": "throwaway_cfc_1905", "upvotes": "312", "time": "9 May 2026", "text": "Kubo starting + scoring the winner is my prediction too. 2-1, extra time, tears (mine)." } ]
+      },
+      { "author": "sw6_ticketless", "time": "9 May 2026", "upvotes": "545", "text": "Lost the ticket ballot for the THIRD final-adjacent event this season. If anyone sees me outside Wembley with a radio and a sad little folding chair, mind your business.", "replies": [] },
+      {
+        "author": "kop_lurker_96", "time": "9 May 2026", "upvotes": "289",
+        "text": "Liverpool fan here in peace. You lot terrify me far more than the league table suggests and I've watched the PSG second leg twice. See you at Wembley, may the neutral-infuriating chaos win.",
+        "replies": [ { "author": "WembleyWayWalker", "upvotes": "198", "time": "9 May 2026", "text": "Respect for walking in here a week early. Genuinely one of the two most annoying possible opponents and it's going to be a great final." } ]
+      },
+      {
+        "author": "contrarian_blue", "time": "9 May 2026", "upvotes": "-83",
+        "text": "Unpopular but honest: I'd rather we rest everyone in the final and go all-in on the last three league games. Top four is worth more than the FA Cup financially, look it up.",
+        "replies": [ { "author": "xabi_ball_enjoyer", "upvotes": "412", "time": "9 May 2026", "text": "'Rest everyone in the final' delete this and go to bed, we're seven points off fourth with three left, the FINAL is the season." } ]
+      }
+    ]
+  },
+  {
     "id": "liverpool-double-week",
     "sub": "chelseafc",
     "flair": "Discussion",
@@ -79,7 +109,14 @@
         "text": "That was one of the great European away performances in a losing cause, and I say that as someone contractually obligated to hate you all. See you next season, this rivalry is getting fun again.",
         "replies": [ { "author": "KTBFFH_1905", "upvotes": "823", "time": "5 May 2026", "text": "Gaz with positive upvotes TWICE in one season. The rebuild really did change everything it touched." } ]
       },
-      { "author": "ZolaWasMyDad", "time": "5 May 2026", "upvotes": "934", "text": "My kid cried at full time and I told him the truth: this is the club, son. It will break your heart in the most spectacular way available and then hand you a cup final eleven days later. Welcome aboard, forever.", "replies": [] }
+      { "author": "ZolaWasMyDad", "time": "5 May 2026", "upvotes": "934", "text": "My kid cried at full time and I told him the truth: this is the club, son. It will break your heart in the most spectacular way available and then hand you a cup final eleven days later. Welcome aboard, forever.", "replies": [] },
+      { "author": "quiet_since_stamford08", "time": "5 May 2026", "upvotes": "823", "text": "Made an account in 2008, never posted, just lurked through everything. Tonight felt like the right night to finally say it: I love this stupid club. That's the post. Back to lurking.", "replies": [] },
+      { "author": "flight_home_delayed", "time": "5 May 2026", "upvotes": "456", "text": "Posting from Charles de Gaulle, flight delayed 3 hours, voice completely gone, £400 lighter, would do all of it again tomorrow. The 10 minutes after the third goal are the loudest I have ever heard an away end anywhere.", "replies": [] },
+      {
+        "author": "ParisianSweep", "time": "5 May 2026", "upvotes": "-267",
+        "text": "6-4 and it honestly wasn't even that close. Best team in the world doesn't lose semis to Premier League mid-table sides. See you in the final (we will be there, you will be watching from home).",
+        "replies": [ { "author": "flight_home_delayed", "upvotes": "534", "time": "5 May 2026", "text": "Your keeper looked like he was passing a kidney stone for the entire second half but sure, 'wasn't even close'. Good luck in the final, sincerely, from my delayed flight." } ]
+      }
     ]
   },
   {
@@ -299,6 +336,7 @@
     "author": "StamfordBridgeCat",
     "time": "18 Apr 2026",
     "upvotes": "3.2k",
+    "locked": true,
     "body": "Chelsea 3-3 Manchester United. Six goals, two leads thrown away, one point, zero fingernails left. Three days after the Metropolitano masterclass we decided defending was optional. Wildly entertaining, mildly infuriating, very much this club.",
     "comments": [
       {
