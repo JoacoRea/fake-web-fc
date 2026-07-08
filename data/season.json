@@ -1,5 +1,5 @@
 {
-  "currentDate": "26 April 2026",
+  "currentDate": "30 April 2026",
   "season": "2025/26",
   "table": [
     { "pos": 1, "team": "Aston Villa", "p": 34, "gd": "+21", "pts": 76 },
@@ -8,9 +8,8 @@
     { "pos": 4, "team": "Liverpool", "p": 34, "gd": "+16", "pts": 62 },
     { "pos": 5, "team": "Chelsea", "p": 34, "gd": "+25", "pts": 57, "us": true }
   ],
-  "form": ["W", "W", "D", "W", "W"],
+  "form": ["W", "D", "W", "W", "L"],
   "fixtures": [
-    { "comp": "Champions League · Semi-final, 1st leg", "date": "Wed 29 Apr", "opponent": "PSG", "home": true },
     { "comp": "Premier League", "date": "Sat 2 May", "opponent": "Nottingham Forest", "home": true },
     { "comp": "Champions League · Semi-final, 2nd leg", "date": "Tue 5 May", "opponent": "PSG", "home": false },
     { "comp": "Premier League", "date": "Sat 9 May", "opponent": "Liverpool", "home": false },
